@@ -1,0 +1,38 @@
+% Glossareinträge - Beispiele für die Vorlage
+
+% ===================================================================
+% ANLEITUNG: Dies sind Beispieleinträge für das Glossar.
+% Ersetzen Sie diese durch Ihre eigenen Begriffe!
+%
+% Zwei Arten von Einträgen:
+% 1. \newglossaryentry{label}{name={}, description={}}  - Normale Begriffe
+% 2. \newacronym{label}{KURZ}{Ausgeschrieben}          - Abkürzungen
+% ===================================================================
+
+% === Beispiel: Normale Glossareinträge ===
+
+\newglossaryentry{blockchain}{
+    name={Blockchain},
+    description={Verteilte, unveränderliche Datenstruktur zur sicheren Speicherung von Transaktionen ohne zentrale Autorität}
+}
+
+% === Beispiel: Akronyme ===
+
+
+\newacronym{json}{JSON}{JavaScript Object Notation}
+\newglossaryentry{json-entry}{
+    name={JavaScript Object Notation},
+    description={Leichtgewichtiges Datenformat für den strukturierten Austausch von Informationen}
+}
+
+
+% ===================================================================
+% VERWENDUNG IM TEXT:
+% - Erste Verwendung: \gls{api} → schreibt "Application Programming Interface (API)" aus
+% - Weitere Verwendungen: \gls{api} → zeigt nur "API"
+% - Plural: \glspl{api} → "APIs"
+% - Großgeschrieben: \Gls{api} → am Satzanfang
+%
+% Für normale Glossareinträge:
+% - \gls{digitalisierung} → "Digitalisierung"
+% ===================================================================

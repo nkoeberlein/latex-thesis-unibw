@@ -1,0 +1,48 @@
+% Modernes Abkürzungsverzeichnis
+% Optimiert für LuaLaTeX und KOMA-Script
+% Nutzt das modernisierte glossaries-System
+
+% === Sauberer Seitenumbruch ===
+\clearpage
+\cleardoublepage
+
+% === Spezielle Formatierung für Abbildungsverzeichnis ===
+\begingroup
+\let\cleardoublepage\relax
+\let\clearpage\relax
+
+% === Institution Logo ===
+\begin{figure}[t]
+  \vspace{1.5cm}
+  \begin{flushright}
+    \IfFileExists{default_style/AtheneGespiegelt.png}{%
+      \includegraphics[width=0.1\textwidth]{default_style/AtheneGespiegelt.png}%
+    }{%
+      \textcolor{secondary}{\rule{0.1\textwidth}{0.1\textwidth}}%
+    }
+  \end{flushright}
+  \vspace{-4.5cm}
+\end{figure}
+
+% === Kapitelüberschrift ohne Nummer ===
+\chapter*{Abkürzungsverzeichnis}
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis}
+\markboth{Abkürzungsverzeichnis}{Abkürzungsverzeichnis}
+
+\glsaddall % Alle Abkürzungen anzeigen
+\renewcommand*{\glossarysection}[2][]{} % entfernt Standard-Titel und Abstand komplett
+
+% === Glossar-Ausgabe ===
+\printglossary[
+  type=acronym,
+  nopostdot,
+  nonumberlist,
+  style=long3col
+]
+
+\endgroup
+
+% === Seitenfüllung und Abschluss ===
+\vspace*{\fill}
+\clearpage
+\thispagestyle{empty}

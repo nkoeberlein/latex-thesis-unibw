@@ -1,0 +1,156 @@
+% ===================================================================
+% Beispiel-Bibliographie für LaTeX-Vorlage
+% Format: BibLaTeX
+% ===================================================================
+%
+% ANLEITUNG: Dies sind Beispieleinträge für verschiedene Quellentypen.
+% Ersetzen Sie diese durch Ihre eigenen Quellen!
+%
+% Zitieren im Text: \cite{key}
+% Mehrere Quellen: \cite{key1,key2}
+% ===================================================================
+
+% === Bücher ===
+
+@book{knuth1984texbook,
+    author = {Knuth, Donald E.},
+    title = {The TeXbook},
+    year = {1984},
+    publisher = {Addison-Wesley},
+    address = {Reading, Massachusetts},
+    isbn = {0-201-13447-0},
+    edition = {1}
+}
+
+@book{lamport1994latex,
+    author = {Lamport, Leslie},
+    title = {LaTeX: A Document Preparation System},
+    year = {1994},
+    publisher = {Addison-Wesley},
+    address = {Reading, Massachusetts},
+    edition = {2},
+    isbn = {0-201-52983-1}
+}
+
+% === Zeitschriftenartikel ===
+
+@article{dijkstra1968goto,
+    author = {Dijkstra, Edsger W.},
+    title = {Go To Statement Considered Harmful},
+    journal = {Communications of the ACM},
+    year = {1968},
+    volume = {11},
+    number = {3},
+    pages = {147--148},
+    doi = {10.1145/362929.362947}
+}
+
+@article{shannon1948mathematical,
+    author = {Shannon, Claude E.},
+    title = {A Mathematical Theory of Communication},
+    journal = {Bell System Technical Journal},
+    year = {1948},
+    volume = {27},
+    number = {3},
+    pages = {379--423},
+    doi = {10.1002/j.1538-7305.1948.tb01338.x}
+}
+
+% === Konferenzbeiträge ===
+
+@inproceedings{hinton2012imagenet,
+    author = {Krizhevsky, Alex and Sutskever, Ilya and Hinton, Geoffrey E.},
+    title = {ImageNet Classification with Deep Convolutional Neural Networks},
+    booktitle = {Advances in Neural Information Processing Systems 25},
+    year = {2012},
+    pages = {1097--1105},
+    editor = {Pereira, F. and Burges, C.J.C. and Bottou, L. and Weinberger, K.Q.}
+}
+
+% === Online-Quellen ===
+
+@online{mozilla2024mdn,
+    author = {{Mozilla Developer Network}},
+    title = {JavaScript Guide},
+    year = {2024},
+    url = {https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide},
+    urldate = {2024-01-15},
+    note = {Accessed: 2024-01-15}
+}
+
+@online{w3c2023html,
+    author = {{World Wide Web Consortium}},
+    title = {HTML Living Standard},
+    year = {2023},
+    url = {https://html.spec.whatwg.org/},
+    urldate = {2023-12-01}
+}
+
+% === Technische Berichte ===
+
+@techreport{turing1950computing,
+    author = {Turing, Alan M.},
+    title = {Computing Machinery and Intelligence},
+    institution = {Mind},
+    year = {1950},
+    number = {59},
+    type = {Technical Report},
+    pages = {433--460}
+}
+
+% === Master-/Bachelorarbeiten ===
+
+@mastersthesis{mustermann2023beispiel,
+    author = {Mustermann, Max},
+    title = {Ein Beispiel für eine Masterarbeit über moderne Softwarearchitekturen},
+    school = {Universität der Bundeswehr München},
+    year = {2023},
+    type = {Master's Thesis},
+    address = {Neubiberg}
+}
+
+@phdthesis{beispiel2022dissertation,
+    author = {Beispiel, Anna},
+    title = {Advances in Machine Learning for Natural Language Processing},
+    school = {Technische Universität München},
+    year = {2022},
+    type = {Dissertation}
+}
+
+% === Software/Code ===
+
+@software{torvalds2023linux,
+    author = {Torvalds, Linus and {Linux Kernel Developers}},
+    title = {Linux Kernel},
+    year = {2023},
+    version = {6.5},
+    url = {https://www.kernel.org/},
+    note = {Open Source Operating System Kernel}
+}
+
+% === Standards ===
+
+@manual{iso9001,
+    title = {ISO 9001:2015 Quality Management Systems},
+    organization = {International Organization for Standardization},
+    year = {2015},
+    address = {Geneva, Switzerland}
+}
+
+% === Beispiel für Bildquellen (eigene Kategorie) ===
+
+@misc{fig:beispielbild,
+    title = {Beispielarchitektur-Diagramm},
+    author = {{Eigene Darstellung}},
+    year = {2024},
+    note = {Basierend auf \cite{lamport1994latex}}
+}
+
+% ===================================================================
+% TIPPS:
+% - Verwenden Sie aussagekräftige Schlüssel (keys)
+% - Nutzen Sie Tools wie Zotero, Mendeley für BibTeX-Export
+% - Konsistente Formatierung (z.B. immer "München" statt "Munich")
+% - DOI angeben wenn verfügbar
+% - URLs mit \url{} oder im url-Feld
+% ===================================================================

@@ -1,0 +1,35 @@
+% Moderne ASCII-Art und Terminal-Support
+% Optimiert für Box-Drawing-Characters (UTF-8)
+% Wird verwenden für X-Road Logs und Konsolenausgaben in Bachelorarbeit
+
+% Definiere eine spezielle Schriftart für Terminal-Ausgaben,
+% da Standard-Fonts oft Lücken bei Box-Drawing-Zeichen lassen.
+\newcommand{\termfontsetup}{}
+
+\IfFontExistsTF{DejaVu Sans Mono}{
+    \newfontfamily\terminalfont{DejaVu Sans Mono}[Scale=0.85]
+    \renewcommand{\termfontsetup}{\terminalfont}
+}{
+    \IfFontExistsTF{Liberation Mono}{
+        \newfontfamily\terminalfont{Liberation Mono}[Scale=0.85]
+        \renewcommand{\termfontsetup}{\terminalfont}
+    }{
+        % Fallback auf Standard-Monospace
+        \renewcommand{\termfontsetup}{\ttfamily}
+    }
+}
+
+% Terminal-Environment
+% Nutze \newminted für robustes Handling von Verbatim-Umgebungen
+% Definiert environment "terminal"
+% Nutzung: \begin{terminal} ... \end{terminal}
+\newminted[terminal]{text}{
+    formatcom=\termfontsetup\linespread{0.95}, % Engerer Zeilenabstand für Box-Drawing
+    fontsize=\footnotesize,
+    breaklines=true,
+    frame=single,
+    framesep=10pt,
+    rulecolor=codeborder,
+    bgcolor=codebg,
+    linenos=false
+}

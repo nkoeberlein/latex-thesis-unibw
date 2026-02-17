@@ -1,0 +1,175 @@
+% Moderne Fußnoten-Konfiguration für LuaLaTeX
+% Optimiert für bessere Lesbarkeit und moderne Typografie
+
+% --- Footmisc-Paket mit erweiterten Optionen ---
+\usepackage[
+  bottom,                      % Fußnoten am Seitenende (Standard)
+  hang,                        % Hängende Einrückung
+  stable,                      % Stabile Referenzen
+  multiple,                    % Mehrere Fußnoten pro Stelle möglich
+  norule                       % Moderne Option: keine Linie (optional)
+]{footmisc}
+
+% --- Grundlegende Abstände ---
+\setlength{\footnotemargin}{12pt}        % Etwas mehr Platz (war 10pt)
+\setlength{\footnotesep}{8pt}            % Abstand zwischen Fußnoten
+\setlength{\skip\footins}{12pt plus 4pt minus 2pt}  % Flexibler Abstand zum Text
+
+% --- Mehrzeilige Fußnoten (aktiviert) ---
+\renewcommand{\hangfootparindent}{1.5em}  % Einrückung 2. Absatz
+\renewcommand{\hangfootparskip}{6pt}      % Abstand zwischen Absätzen
+
+% --- Erweiterte Formatierung ---
+% Fußnotennummer-Stil
+\renewcommand{\thefootnote}{\textcolor{secondary}{\arabic{footnote}}}
+
+% Layout der Fußnotennummer im Text (Superscript) - vereinfacht
+% \renewcommand{\@makefnmark}{%
+%   \hbox{\@textsuperscript{\normalfont\textcolor{primary}{\@thefnmark}}}%
+% }
+
+% Layout der Fußnotennummer in der Fußnote selbst - vereinfacht  
+% \renewcommand{\@makefntext}[1]{%
+%   \parindent 1em
+%   \noindent
+%   \hb@xt@1.8em{\hss\textcolor{secondary}{\@thefnmark}\,}#1%
+% }
+
+% --- Alternative: Moderne Fußnoten mit besserer Trennung ---
+% Ersetze Standard-Linie durch moderne Variante
+\renewcommand{\footnoterule}{%
+  \kern-3pt
+  {\color{primary}\hrule width 0.4\columnwidth height 0.5pt}
+  \kern 2.6pt
+}
+
+% --- Fußnoten-Schriftart (bereits in TocStyle definiert, hier verfeinert) ---
+\renewcommand{\footnotesize}{\fontsize{9}{11}\selectfont}  % Etwas größer als Standard
+\addtokomafont{footnote}{\color{darkgray}}                  % Dezente Farbe
+
+% --- Erweiterte Fußnoten-Features ---
+% Für sehr lange Fußnoten: bessere Umbrüche
+\tolerance=5000
+\emergencystretch=3pt
+
+% Verhindere Fußnoten-Waisen (einzelne Zeile auf neuer Seite)
+\interfootnotelinepenalty=10000
+
+% --- Fußnoten in verschiedenen Umgebungen ---
+% Für Tabellen und Minipages (Reihenfolge wichtig!)
+\usepackage{footnotebackref}             % Rückverweise (MUSS vor tablefootnote!)
+\usepackage{tablefootnote}               % Fußnoten in Tabellen
+
+% --- Spezielle Fußnoten-Stile ---
+% Für verschiedene Dokumentbereiche
+\newcommand{\symbolfootnote}[1]{%
+  % Verwendet Symbole statt Zahlen
+  \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+  \footnote{#1}
+  \renewcommand{\thefootnote}{\arabic{footnote}}
+}
+
+% Für Titelseite (oft andere Nummerierung)
+\newcommand{\titlefootnote}[1]{%
+  \let\thefootnoteold\thefootnote
+  \renewcommand{\thefootnote}{\alph{footnote}}
+  \footnote{#1}
+  \let\thefootnote\thefootnoteold
+}
+
+% --- Integration mit Hyperref ---
+\makeatletter
+\@ifpackageloaded{hyperref}{%
+  % Hyperref-kompatible Fußnoten
+  \renewcommand{\@makefntext}[1]{%
+    \parindent 1em
+    \noindent
+    \hb@xt@1.8em{\hss\hyper@makecurrent{Hfootnote}%
+    \hypertarget{Hfootnote.\theHfootnote}%
+    {\textcolor{secondary}{\@thefnmark}}\,}#1%
+  }
+}{}
+\makeatother
+
+% --- Mehrsprachige Fußnoten ---
+\makeatletter
+\@ifpackageloaded{polyglossia}{%
+  % Anpassung für deutsche/englische Texte
+  \newcommand{\englishfootnote}[1]{%
+    \begin{otherlanguage}{english}
+    \footnote{#1}
+    \end{otherlanguage}
+  }
+}{}
+\makeatother
+
+% --- Debugging und erweiterte Kontrolle ---
+% Zeige Fußnoten-Informationen (für Entwicklung)
+\newif\ifdebugfootnotes
+% \debugfootnotestrue
+
+\ifdebugfootnotes
+\AtBeginDocument{%
+  \typeout{=== Fußnoten-Debug ===}
+  \typeout{Margin: \the\footnotemargin}
+  \typeout{Sep: \the\footnotesep}
+  \typeout{Skip footins: \the\skip\footins}
+  \typeout{===================}
+}
+\fi
+
+% --- Praktische Utility-Befehle ---
+% Quellenangaben in Fußnoten
+\newcommand{\sourcefootnote}[1]{%
+  \footnote{\textit{Quelle:} #1}
+}
+
+% Anmerkungen des Autors
+\newcommand{\authornote}[1]{%
+  \footnote{\textit{Anm. d. Verf.:} #1}
+}
+
+% Übersetzungshinweise
+\newcommand{\transnote}[1]{%
+  \footnote{\textit{Übersetzung d. Verf.:} #1}
+}
+
+% --- Alternative: Randbemerkungen statt Fußnoten ---
+% Für moderne, saubere Layouts
+\newcommand{\marginnote}[1]{%
+  \marginpar{\footnotesize\raggedright\textcolor{secondary}{#1}}
+}
+
+% --- KOMA-Script Integration ---
+% Nutzt KOMA's erweiterte Fußnoten-Features
+\KOMAoptions{
+  footnotes=multiple,          % Mehrere Fußnoten
+  footnotes=nomultiple         % oder: keine mehrfachen (je nach Bedarf)
+}
+
+% --- Conditional Compilation: Druck vs. Digital ---
+\makeatletter
+\@ifundefined{ifprintversion}{}{%
+  \ifprintversion
+    % Druck: Konservativere Fußnoten
+    \renewcommand{\footnoterule}{%
+      \kern-3pt
+      {\color{printgray}\hrule width 0.4\columnwidth height 0.4pt}
+      \kern 2.6pt
+    }
+    \addtokomafont{footnote}{\color{printblack}}
+  \else
+    % Digital: Moderne, farbige Fußnoten (wie oben definiert)
+  \fi
+}
+\makeatother
+
+% --- Debug-Information ---
+\AtBeginDocument{%
+  \typeout{=== Fußnoten konfiguriert ===}
+  \typeout{Paket: footmisc (erweitert)}
+  \typeout{Stil: Hängend mit Farben}
+  \typeout{Margin: \the\footnotemargin}
+  \typeout{Features: Mehrsprachig, Hyperref-kompatibel}
+  \typeout{===============================}
+}

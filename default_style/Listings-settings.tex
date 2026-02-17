@@ -1,0 +1,203 @@
+% Modernes Code-Highlighting mit minted für LuaLaTeX
+% Ersetzt das veraltete listings-Paket komplett
+
+% --- Hyperref-kompatible Minted-Konfiguration ---
+% minted lädt hyperref automatisch - wir konfigurieren es nach dem Laden
+\PassOptionsToPackage{
+  unicode=true,
+  breaklinks=true,
+  colorlinks=true
+}{hyperref}
+
+% --- Minted-Paket mit LuaLaTeX-Optimierungen ---
+\usepackage[
+  cache=true,                    % Caching für bessere Performance
+  cachedir=build/minted-cache,   % Cache-Verzeichnis
+  frozencache=false              % Cache aktualisierbar
+]{minted}
+
+% --- Moderne Farbdefinitionen (konsistent mit Template) ---
+% Nutzt die bereits definierten Farben aus Farben_definieren-settings.tex
+\definecolor{codebg}{RGB}{248, 248, 248}        % Hintergrund
+\definecolor{codeborder}{RGB}{224, 224, 224}    % Rahmen
+
+% --- Standard-Minted-Konfiguration ---
+\setminted{
+  % === Layout ===
+  bgcolor=codebg,                % Hintergrundfarbe
+  frame=single,                  % Einfacher Rahmen
+  framesep=10pt,                 % Abstand zum Rahmen
+  rulecolor=codeborder,          % Rahmenfarbe
+  % === Schrift ===
+  fontsize=\small,               % Schriftgröße
+  fontfamily=tt,                 % Monospace
+  % === Verhalten ===
+  breaklines=true,               % Automatischer Zeilenumbruch
+  breakanywhere=true,            % Umbruch überall möglich
+  autogobble=true,               % Automatisches Einrückung entfernen
+  % === Nummerierung ===
+  linenos=false,                 % Standardmäßig keine Zeilennummern
+  xleftmargin=0pt,               % Kein extra Rand
+  % === Moderne Features ===
+  style=default,                 % Standard-Highlighting-Style
+  tabsize=2                      % Tab-Größe
+}
+
+% --- Sprachspezifische Konfigurationen ---
+% Für besonders häufig verwendete Sprachen
+
+\setminted[python]{
+  style=default,
+  python3=true,
+  linenos=true,
+  numbersep=8pt
+}
+
+\setminted[scala]{
+  style=default,
+  linenos=true,
+  numbersep=8pt
+}
+
+\setminted[java]{
+  style=default,
+  linenos=true,
+  numbersep=8pt
+}
+
+\setminted[javascript]{
+  style=default,
+  linenos=true,
+  numbersep=8pt
+}
+
+\setminted[rust]{
+  style=default,
+  linenos=true,
+  numbersep=8pt
+}
+
+\setminted[json]{
+  style=default,
+  linenos=false
+}
+
+\setminted[yaml]{
+  style=default,
+  linenos=false
+}
+
+% --- Moderne Themes (auskommentiert - aktivierbar) ---
+% Verschiedene Highlighting-Styles:
+% \setminted{style=github}        % GitHub-Style
+% \setminted{style=vs}            % Visual Studio
+% \setminted{style=monokai}       % Monokai (dunkel)
+% \setminted{style=solarized}     % Solarized
+% \setminted{style=colorful}      % Farbig
+
+% --- Convenience-Befehle ---
+% Inline-Code (ersetzt \lstinline)
+\newcommand{\inlinecode}[2][text]{\mintinline{#1}{#2}}
+
+% Code aus Datei einbinden (ersetzt \lstinputlisting)
+\newcommand{\inputcode}[3][]{%
+  \inputminted[#1]{#2}{#3}%
+}
+
+% Spezifische Sprach-Befehle für häufige Verwendung
+\newcommand{\pythoninput}[2][]{\inputminted[linenos,#1]{python}{#2}}
+\newcommand{\javainput}[2][]{\inputminted[linenos,#1]{java}{#2}}
+\newcommand{\jsinput}[2][]{\inputminted[linenos,#1]{javascript}{#2}}
+\newcommand{\rustinput}[2][]{\inputminted[linenos,#1]{rust}{#2}}
+
+% --- Moderne Code-Umgebungen ---
+
+% Standard-Code-Umgebung
+\newenvironment{moderncode}[2][]{%
+  \VerbatimEnvironment
+  \begin{minted}[#1]{#2}%
+}{%
+  \end{minted}%
+}
+
+% Code mit Zeilennummern
+\newenvironment{numberedcode}[2][]{%
+  \VerbatimEnvironment
+  \begin{minted}[linenos,#1]{#2}%
+}{%
+  \end{minted}%
+}
+
+% --- Caption-Integration ---
+% Für Code-Listings mit Beschriftungen
+\usepackage{newfloat}
+\DeclareFloatingEnvironment[
+  fileext=lol,
+  listname={Codeverzeichnis},
+  name=Code,
+  placement=tbp,
+]{codefloat}
+
+% Code-Float-Umgebung
+\newenvironment{codelisting}[3][htbp]{%
+  \begin{codefloat}[#1]
+  \caption{#3}
+  \begin{minted}{#2}%
+}{%
+  \end{minted}
+  \end{codefloat}%
+}
+
+% --- Unterstützte Sprachen (300+) ---
+% Beispiele der wichtigsten:
+% - Python, Java, JavaScript, TypeScript
+% - Rust, Go, Swift, Kotlin, Scala, Dart
+% - C, C++, C#, PHP, Ruby, Perl
+% - HTML, CSS, XML, JSON, YAML, TOML
+% - SQL, bash, PowerShell, Dockerfile
+% - LaTeX, Markdown, und viele mehr!
+
+% --- Performance-Optimierungen ---
+% Shell-Escape aktivieren (automatisch von minted)
+\makeatletter
+\@ifpackageloaded{shellesc}{}{%
+  \PackageWarning{minted-settings}{%
+    Shell-Escape nicht aktiviert. Verwenden Sie --shell-escape beim Kompilieren.%
+  }
+}
+\makeatother
+
+% --- Debug-Information ---
+\AtBeginDocument{%
+  \typeout{=== Minted Code-Highlighting ===}
+  \typeout{Engine: Pygments (300+ Sprachen)}
+  \typeout{Cache: aktiviert (build/minted-cache)}
+  \typeout{Features: Automatischer Umbruch, Unicode}
+  \typeout{Kompilierung: lualatex --shell-escape}
+  \typeout{Beispiel: \string\begin{minted}{python}...\string\end{minted}}
+  \typeout{===================================}
+}
+
+% --- Verwendungsbeispiele (auskommentiert) ---
+% \begin{minted}{python}
+% def fibonacci(n):
+%     if n <= 1:
+%         return n
+%     return fibonacci(n-1) + fibonacci(n-2)
+% \end{minted}
+%
+% \begin{minted}{rust}
+% fn main() {
+%     println!("Hello, world! ��");
+% }
+% \end{minted}
+%
+% \inputcode{python}{scripts/example.py}
+% \inlinecode[python]{print("inline code")}
+%
+% \begin{codelisting}{javascript}{Moderne JavaScript-Funktion}
+% const api = async () => {
+%   const response = await fetch('/api/data');
+%   return response.json();
+% };
+% \end{codelisting}

@@ -1,0 +1,27 @@
+%\usepackage[final]{draftwatermark}
+%SetWatermarkText{Entwurf}
+%\SetWatermarkScale{1.5} % Größe des Wasserzeichens
+%\SetWatermarkAngle{45}
+%\SetWatermarkColor[gray]{0.85} % Helligkeit (1 = weiß, 0 = schwarz)
+%\SetWatermarkLightness{0.85}
+
+%\usepackage{xwatermark}
+%\newwatermark[allpages,color=gray!30,angle=45,scale=8,xpos=-30,ypos=30]{Entwurf}
+
+%\usepackage{background}
+%\backgroundsetup{
+%  scale=20,
+%  color=gray!30,
+%  angle=45,
+%  contents={Entwurf}
+%}
+
+\usepackage{tikz}
+\usepackage{eso-pic}
+
+\AddToShipoutPictureBG{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[rotate=45,scale=20,text opacity=0.15,text=black!50] 
+      at (current page.center) {Entwurf};
+  \end{tikzpicture}%
+}

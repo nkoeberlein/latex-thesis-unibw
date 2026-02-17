@@ -1,0 +1,45 @@
+% Modernes Glossar
+% Nutzt das modernisierte glossaries-System
+
+% === Sauberer Seitenumbruch ===
+\cleardoublepage
+
+% === Spezielle Formatierung für Glossar ===
+\begingroup
+\let\cleardoublepage\relax
+\let\clearpage\relax
+
+% === Institution Logo ===
+\begin{figure}[t]
+  \vspace{1.5cm}
+  \begin{flushright}
+    \IfFileExists{default_style/AtheneGespiegelt.png}{%
+      \includegraphics[width=0.1\textwidth]{default_style/AtheneGespiegelt.png}%
+    }{%
+      \textcolor{secondary}{\rule{0.1\textwidth}{0.1\textwidth}}%
+    }
+  \end{flushright}
+  \vspace{-4.5cm}
+\end{figure}
+
+% === Glossar-Kapitel ===
+\chapter{Glossar}\label{glossar}
+
+% === Alle Glossar-Einträge anzeigen ===
+\glsaddall
+% Verhindert doppelte Überschrift und TOC-Eintrag durch glossaries-Paket
+\renewcommand*{\glossarysection}[2][]{}
+
+% === Hauptglossary drucken ===
+\printglossary[
+  type=main,
+  style=list,
+  nopostdot,
+  nonumberlist
+]
+\endgroup
+
+% === Seitenfüllung und Abschluss ===
+\vspace*{\fill}
+\clearpage
+\thispagestyle{empty}

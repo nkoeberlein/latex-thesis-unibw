@@ -1,0 +1,139 @@
+# ===================================================================
+# .gitignore für LaTeX-Projekte
+# Universität der Bundeswehr München - LaTeX-Vorlage
+# ===================================================================
+
+# === LaTeX Build Files ===
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+
+# === Bibliographie ===
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+
+# === Glossar und Akronyme ===
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.glsdefs
+*.ist
+*.xdy
+*.nlg
+*.ntn
+*.not
+
+# === Symbole ===
+*.slg
+*.syg
+*.syi
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+
+# === minted Code-Highlighting ===
+_minted-*
+*.pyg
+
+# === Hyperref ===
+*.brf
+
+# === KOMA-Script ===
+*.lco
+
+# === BibTeX ===
+*.bbl-SAVE-ERROR
+
+# === LaTeXMk ===
+*.fdb_latexmk
+*.ilg
+*.ind
+
+# === Andere ===
+*.dvi
+*.ps
+*.pdf-save-error
+*.xmpdata
+*.xwm
+
+# === Build Directory (optional) ===
+build/
+*.backup
+
+# === Editor-spezifische Dateien ===
+# VSCode
+.vscode/
+*.code-workspace
+
+# TeXstudio
+*.txss
+
+# TeXnicCenter
+*.tcp
+*.tps
+
+# Kile
+*.kilepr
+
+# === macOS ===
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# === Linux ===
+*~
+\#*\#
+.\#*
+
+# === Windows ===
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# === Temporary Files ===
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+
+# === KEEP THESE FILES ===
+# Alle .tex Dateien bleiben
+!*.tex
+# Alle .bib Dateien bleiben
+!*.bib
+# Alle .cls und .sty Dateien bleiben
+!*.cls
+!*.sty
+# README bleibt
+!README.md
+!readme.tex
+!readme.pdf
+
+# === Ausnahmen für wichtige PDFs ===
+# Das fertige PDF sollten Sie bei Bedarf committen
+# Kommentieren Sie die nächste Zeile aus, um PDFs zu tracken:
+# !1Main.pdf
+
+# Aber andere PDFs (Logos, Signet) sollen bleiben
+!default_style/*.pdf
+!media/*.pdf
+!figures/*.pdf

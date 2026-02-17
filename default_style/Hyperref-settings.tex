@@ -1,0 +1,88 @@
+% --- PDF-Metadaten (% Moderne Hyperref-Konfiguration für LuaLaTeX
+% WICHTIG: hyperref wird bereits von minted geladen - NUR konfigurieren!
+
+% --- URL-Handling (bereits in load_packages.tex) ---
+% url und xurl sind bereits geladen
+
+% --- Hyperref-Konfiguration (OHNE \usepackage!) ---
+% hyperref ist bereits von minted geladen - wir konfigurieren nur noch
+\hypersetup{
+  unicode=true,                % Unicode-Support (Standard in LuaLaTeX)
+  breaklinks=true,             % Erlaubt Umbruch langer Links
+  colorlinks=true,             % Farbige Links statt Rahmen (moderner)
+  allcolors=blue!70!black,     % Einheitliche, dezente Linkfarbe
+  % Alternative: individuelle Farben
+  linkcolor=blue!70!black,     % Interne Links (Referenzen, TOC)
+  citecolor=green!60!black,    % Literaturreferenzen
+  urlcolor=blue!80!black,      % Externe URLs
+  filecolor=purple!60!black,   % Datei-Links
+  anchorcolor=black,           % Anker
+  % PDF-Darstellung
+  bookmarks=true,
+  bookmarksopen=true,
+  bookmarksnumbered=true,
+  bookmarksopenlevel=2,        % Mehr Ebenen sichtbar
+  pdfstartview=FitH,           % Horizontal anpassen (besser als Fit)
+  pdfdisplaydoctitle=true,
+  pdfnewwindow=true,
+  % Moderne PDF-Features
+  pdfpagelayout=OneColumn,
+  pdfpagemode=UseOutlines,     % Bookmarks standardmäßig sichtbar
+  pdftoolbar=true,
+  pdfmenubar=true,
+  hidelinks=false              % Links sichtbar (moderne Praxis)
+}
+
+% --- Erweiterte URL-Trennungsregeln für LuaLaTeX ---
+\def\UrlBreaks{%
+    \do\-\do\_\do\/\do\*\do\~\do\'\do\"
+    \do\.\do\:\do\;\do\,\do\?\do\!\do\=
+    \do\+\do\&\do\|\do\@\do\#
+}
+
+% --- PDF-Metadaten (nur Standard-Hyperref-Keys) ---
+\hypersetup{
+    pdflang={de-DE},
+    pdfauthor={Nikolaus Köberlein},
+    pdftitle={E-Estonia als Blaupause für die Digitalisierung der deutschen Verwaltung},
+    pdfsubject={Bachelorarbeit - Analyse der estnischen E-Government-Strategie und Übertragbarkeit auf die deutsche Verwaltungsdigitalisierung},
+    pdfkeywords={%
+        E-Estonia, Digitalisierung, Verwaltung, Deutschland, E-Government, %
+        Digital Government, Estland, Digitale Transformation, %
+        Bürgerdienste, Online-Services, X-Road, Digitale Identität, %
+        E-Residency, Blockchain, Cybersicherheit, %
+        Verwaltungsmodernisierung, Digital First, Once Only, %
+        Interoperabilität, API-First, Bürgerzentrierung, %
+        Prozessoptimierung, Verwaltungseffizienz, %
+        Best Practices, Digitale Infrastruktur, %
+        Cloud Computing, Serviceorientierte Architektur, %
+        Datenmanagement, Datenschutz, GDPR, DSGVO, %
+        Change Management, Digitale Kompetenzen, %
+        E-Services, Mobile Government, Automatisierung%
+    },
+    pdfcreator={LuaLaTeX},
+    pdfproducer={LaTeX with hyperref and LuaTeX}
+}
+
+% --- Erweiterte PDF-Metadaten mit hyperxmp (optional) ---
+\usepackage{hyperxmp}
+
+% --- Bessere Link-Darstellung ---
+\urlstyle{same}                        % URLs in derselben Schrift wie Text
+
+% --- Fix für deutsche Umlaute in Bookmarks ---
+\usepackage{bookmark}
+\bookmarksetup{
+    numbered,
+    open,
+    openlevel=2
+}
+
+% --- Debug-Information ---
+\AtBeginDocument{%
+  \typeout{=== Hyperref konfiguriert ===}
+  \typeout{Status: Von minted geladen}
+  \typeout{Farben: Aktiviert}
+  \typeout{PDF-Metadaten: Gesetzt}
+  \typeout{=============================}
+}

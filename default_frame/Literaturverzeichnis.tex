@@ -1,0 +1,37 @@
+% Modernes Literaturverzeichnis
+% Nutzt biblatex für Quellenangaben
+
+% === Sauberer Seitenumbruch ===
+\clearpage
+\cleardoublepage
+
+% === Spezielle Formatierung für Literaturverzeichnis ===
+\begingroup
+\let\cleardoublepage\relax
+\let\clearpage\relax
+
+% === Institution Logo ===
+\begin{figure}[t]
+  \vspace{1.5cm}
+  \begin{flushright}
+    \IfFileExists{default_style/AtheneGespiegelt.png}{%
+      \includegraphics[width=0.1\textwidth]{default_style/AtheneGespiegelt.png}%
+    }{%
+      \textcolor{secondary}{\rule{0.1\textwidth}{0.1\textwidth}}%
+    }
+  \end{flushright}
+  \vspace{-4.5cm}
+\end{figure}
+
+% === Literaturverzeichnis drucken ===
+\printbibliography[
+  notcategory=abbildung,
+  title={Literaturverzeichnis}
+]
+
+\endgroup
+
+% === Seitenfüllung und Abschluss ===
+\vspace*{\fill}
+\clearpage
+\thispagestyle{empty}

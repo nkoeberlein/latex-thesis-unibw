@@ -1,0 +1,295 @@
+% Emoji-settings.tex - Moderne Emoji-Unterstützung
+% Ergänzung zum modernisierten LaTeX-Template
+
+% === Emoji-Font-System ===
+% Automatische Erkennung verfügbarer Emoji-Fonts
+\newif\ifEmojiFontFound
+\EmojiFontFoundfalse
+
+\IfFontExistsTF{Noto Color Emoji}{
+  \newfontfamily{\emojifont}{Noto Color Emoji}[
+    Renderer=HarfBuzz,
+    Scale=MatchUppercase
+  ]
+  \typeout{Emoji-Font: Noto Color Emoji}
+  \EmojiFontFoundtrue
+}{
+  \IfFontExistsTF{Apple Color Emoji}{
+    \newfontfamily{\emojifont}{Apple Color Emoji}[
+      Renderer=HarfBuzz,
+      Scale=MatchUppercase
+    ]
+    \typeout{Emoji-Font: Apple Color Emoji}
+    \EmojiFontFoundtrue
+  }{
+    \IfFontExistsTF{Segoe UI Emoji}{
+      \newfontfamily{\emojifont}{Segoe UI Emoji}[
+        Renderer=HarfBuzz,
+        Scale=MatchUppercase
+      ]
+      \typeout{Emoji-Font: Segoe UI Emoji}
+      \EmojiFontFoundtrue
+    }{
+      \IfFontExistsTF{Twemoji}{
+        \newfontfamily{\emojifont}{Twemoji}[
+          Renderer=HarfBuzz,
+          Scale=MatchUppercase
+        ]
+        \typeout{Emoji-Font: Twemoji}
+        \EmojiFontFoundtrue
+      }{
+        % Fallback: Verwende Hauptfont
+        \let\emojifont\rmfamily
+        \PackageWarning{emoji-settings}{%
+          Kein Emoji-Font gefunden. Emojis werden möglicherweise nicht korrekt dargestellt.
+        }
+        \typeout{Emoji-Font: Fallback (Hauptfont, da keine Emoji-Font gefunden)}
+      }
+    }
+  }
+}
+
+% === Robustes Success-Emoji mit TikZ-Fallback ===
+\makeatletter
+\@ifpackageloaded{tikz}{
+  \newcommand{\drawSuccess}{%
+    \begin{tikzpicture}[baseline=-0.5ex, scale=0.25]
+      \fill[success] (0,0) circle (1.2);
+      \draw[white, line width=0.5mm] (-0.5,0) -- (-0.2,-0.4) -- (0.6,0.5);
+    \end{tikzpicture}%
+  }
+  \newcommand{\drawFailure}{%
+     \begin{tikzpicture}[baseline=-0.5ex, scale=0.25]
+      \fill[danger] (0,0) circle (1.2);
+      \draw[white, line width=0.5mm] (-0.4,-0.4) -- (0.4,0.4);
+      \draw[white, line width=0.5mm] (-0.4,0.4) -- (0.4,-0.4);
+    \end{tikzpicture}%
+  }
+  \newcommand{\drawWarning}{%
+    \begin{tikzpicture}[baseline=-0.3ex, scale=0.25]
+      \node[regular polygon, regular polygon sides=3, draw=warning, fill=warning, inner sep=0.5pt, rounded corners=0.5pt] at (0,0) {};
+      \node[black, font=\bfseries\tiny] at (0,-0.1) {!};
+    \end{tikzpicture}%
+  }
+  \newcommand{\drawInfo}{%
+    \begin{tikzpicture}[baseline=-0.5ex, scale=0.25]
+      \fill[info] (0,0) circle (1.2);
+      \node[white, font=\bfseries\large] at (0,0) {i};
+    \end{tikzpicture}%
+  }
+}{
+  \newcommand{\drawSuccess}{\textcolor{success}{Ok}}
+  \newcommand{\drawFailure}{\textcolor{danger}{X}}
+  \newcommand{\drawWarning}{\textcolor{warning}{!}}
+  \newcommand{\drawInfo}{\textcolor{info}{i}}
+}
+\makeatother
+
+% === Basis-Emoji-Befehl ===
+\newcommand{\emoji}[1]{{\emojifont #1}}
+
+% === Häufige Emojis ===
+
+% Definiere \success und Co. robust
+\ifEmojiFontFound
+  \providecommand{\success}{\textcolor{success}{\emoji{✅}}}
+  \providecommand{\failure}{\textcolor{danger}{\emoji{❌}}}
+  \providecommand{\warning}{\textcolor{warning}{\emoji{⚠️}}}
+  \providecommand{\info}{\textcolor{info}{\emoji{ℹ️}}}
+\else
+  % Wenn kein Emoji-Font gefunden, nutze TikZ
+  \providecommand{\success}{\drawSuccess}
+  \providecommand{\failure}{\drawFailure}
+  \providecommand{\warning}{\drawWarning}
+  \providecommand{\info}{\drawInfo}
+\fi
+
+
+% Daumen & Gesten (nur wenn Font da)
+\providecommand{\thumbsup}{\ifEmojiFontFound\emoji{}\else(ok)\fi}
+\providecommand{\thumbsdown}{\ifEmojiFontFound\emoji{}\else(no)\fi}
+\providecommand{\clap}{\ifEmojiFontFound\emoji{}\else(clap)\fi}
+\providecommand{\wave}{\ifEmojiFontFound\emoji{}\else(wave)\fi}
+\providecommand{\point}{\ifEmojiFontFound\emoji{}\else(point)\fi}
+
+% Herzen & Sterne (Prefix \e...)
+\providecommand{\heart}{\ifEmojiFontFound\emoji{❤️}\else<3\fi}
+\newcommand{\eHeartRed}{\textcolor{danger}{\ifEmojiFontFound\emoji{❤️}\else<3\fi}}
+\newcommand{\eStar}{\ifEmojiFontFound\emoji{⭐}\else*\fi} 
+\newcommand{\eStarFull}{}
+
+% Tech & Business
+\providecommand{\rocket}{}
+\providecommand{\fire}{}
+\providecommand{\lightning}{\ifEmojiFontFound\emoji{⚡}\else flash \fi}
+\providecommand{\gear}{\ifEmojiFontFound\emoji{⚙️}\else gear \fi}
+\providecommand{\computer}{\ifEmojiFontFound\emoji{}\else PC \fi}
+\providecommand{\mobile}{\ifEmojiFontFound\emoji{}\else Handy \fi}
+
+% Semantische Status Alternative (Texte)
+\providecommand{\error}{\failure}
+\providecommand{\question}{\textcolor{secondary}{?}}
+\providecommand{\attention}{\warning}
+
+% Alternative Darstellungen
+\providecommand{\tick}{\success}
+\providecommand{\checkmark}{\success}
+\providecommand{\crossmark}{\failure}
+
+% === Fachspezifische Symbole ===
+% Cloud & IT
+\providecommand{\cloud}{\ifEmojiFontFound\emoji{☁️}\else Cloud \fi}
+\providecommand{\database}{\ifEmojiFontFound\emoji{️}\else DB \fi}
+\providecommand{\server}{\ifEmojiFontFound\emoji{️}\else Server \fi}
+\providecommand{\network}{\ifEmojiFontFound\emoji{}\else Network \fi}
+\providecommand{\security}{\ifEmojiFontFound\emoji{}\else Security \fi}
+\providecommand{\key}{\ifEmojiFontFound\emoji{}\else Key \fi}
+
+% Business & Kommunikation
+\providecommand{\email}{\ifEmojiFontFound\emoji{}\else Email \fi}
+\providecommand{\phone}{\ifEmojiFontFound\emoji{}\else Phone \fi}
+\providecommand{\calendar}{\ifEmojiFontFound\emoji{}\else Cal \fi}
+\providecommand{\clock}{\ifEmojiFontFound\emoji{}\else Time \fi}
+\providecommand{\location}{\ifEmojiFontFound\emoji{}\else Loc \fi}
+\providecommand{\building}{\ifEmojiFontFound\emoji{}\else Bldg \fi}
+
+% Dokumente & Dateien
+\newcommand{\eDocument}{}
+\newcommand{\eFolder}{}
+\newcommand{\eChart}{}
+\newcommand{\eGraph}{}
+\newcommand{\eTrending}{}
+
+
+% === Pfeile & Navigation ===
+\newcommand{\eArrowRight}{\ifEmojiFontFound\emoji{→}\else $\rightarrow$ \fi}
+\newcommand{\eArrowLeft}{\ifEmojiFontFound\emoji{←}\else $\leftarrow$ \fi}
+\newcommand{\eArrowUp}{\ifEmojiFontFound\emoji{↑}\else $\uparrow$ \fi}
+\newcommand{\eArrowDown}{\ifEmojiFontFound\emoji{↓}\else $\downarrow$ \fi}
+\newcommand{\eArrowLeftRight}{\ifEmojiFontFound\emoji{↔}\else $\leftrightarrow$ \fi}
+\newcommand{\eImplies}{\ifEmojiFontFound\emoji{⇒}\else $\Rightarrow$ \fi}
+
+% Farbige Pfeile
+\newcommand{\eGreenArrow}{\textcolor{success}{\eArrowRight}}
+\newcommand{\eRedArrow}{\textcolor{danger}{\eArrowRight}}
+\newcommand{\eBlueArrow}{\textcolor{primary}{\eArrowRight}}
+
+% === Listen mit Emoji-Bullets ===
+\newlist{emojilist}{itemize}{3}
+\setlist[emojilist,1]{label=, leftmargin=2em}
+\setlist[emojilist,2]{label=▫️, leftmargin=1.5em}
+\setlist[emojilist,3]{label=•, leftmargin=1em}
+
+\newlist{checklist}{itemize}{2}
+\setlist[checklist,1]{label=\success, leftmargin=2em}
+\setlist[checklist,2]{label=\checkmark, leftmargin=1.5em}
+
+\newlist{todolist}{itemize}{2}
+\setlist[todolist,1]{label=☐, leftmargin=2em}
+\setlist[todolist,2]{label=▫️, leftmargin=1.5em}
+
+\newlist{starlist}{itemize}{2}
+\setlist[starlist,1]{label=\eStar, leftmargin=2em}
+\setlist[starlist,2]{label=, leftmargin=1.5em}
+
+% === Spezielle Formate ===
+\newcommand{\important}[1]{%
+  \warning \textbf{\textcolor{warning}{Wichtig:}} #1%
+}
+
+\newcommand{\note}[1]{%
+  \info \textbf{\textcolor{info}{Hinweis:}} #1%
+}
+
+\newcommand{\tip}[1]{%
+   \textbf{\textcolor{primary}{Tipp:}} #1%
+}
+
+\newcommand{\achievement}[1]{%
+   \textbf{\textcolor{success}{Erfolg:}} #1%
+}
+
+% === Bewertungs-Systeme ===
+\newcommand{\onestar}{\eStar}
+\newcommand{\twostars}{\eStar\eStar}
+\newcommand{\threestars}{\eStar\eStar\eStar}
+\newcommand{\fourstars}{\eStar\eStar\eStar\eStar}
+\newcommand{\fivestars}{\eStar\eStar\eStar\eStar\eStar}
+
+% Ampel-System
+\newcommand{\redlight}{\textcolor{danger}{\ifEmojiFontFound\emoji{}\else(ROT)\fi}}
+\newcommand{\yellowlight}{\textcolor{warning}{\ifEmojiFontFound\emoji{}\else(GELB)\fi}}
+\newcommand{\greenlight}{\textcolor{success}{\ifEmojiFontFound\emoji{}\else(GRUEN)\fi}}
+
+% === Test-Funktion ===
+\newcommand{\emojitest}{%
+  \begin{center}
+  \textbf{Emoji-System Test (TikZ Fallback: \ifEmojiFontFound nein \else ja \fi)}\\[0.5em]
+  \begin{tabular}{ll}
+  \textbf{Status:} & \success{} \failure{} \warning{} \info{} \\
+  \end{tabular}
+  \end{center}
+}
+
+% === Beispiel-Umgebungen ===
+\newenvironment{successbox}{%
+  \begin{tcolorbox}[
+    enhanced,
+    colback=success!10,
+    colframe=success,
+    boxrule=1pt,
+    sharp corners,
+    before upper={\success{} \textbf{Erfolg:} }
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{warningbox}{%
+  \begin{tcolorbox}[
+    enhanced,
+    colback=warning!10,
+    colframe=warning,
+    boxrule=1pt,
+    sharp corners,
+    before upper={\warning{} \textbf{Warnung:} }
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{infobox}{%
+  \begin{tcolorbox}[
+    enhanced,
+    colback=info!10,
+    colframe=info,
+    boxrule=1pt,
+    sharp corners,
+    before upper={\info{} \textbf{Information:} }
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+% === Integration mit bestehendem System ===
+\makeatletter
+\@ifundefined{success}{
+  \definecolor{success}{RGB}{40, 167, 69}
+  \definecolor{danger}{RGB}{220, 53, 69}
+  \definecolor{info}{RGB}{23, 162, 184}
+  \definecolor{warning}{RGB}{255, 193, 7}
+  \definecolor{primary}{RGB}{0, 102, 153}
+  \definecolor{secondary}{RGB}{102, 102, 102}
+}{}
+\makeatother
+
+% === Debug-Information ===
+\AtBeginDocument{%
+  \typeout{=== Emoji-System aktiviert ===}
+  \ifEmojiFontFound
+     \typeout{Emoji-Font: Gefunden (Unicode)}
+  \else
+     \typeout{Emoji-Font: NICHT GEFUNDEN (TikZ Fallback aktiv)}
+  \fi
+  \typeout{===============================}
+}

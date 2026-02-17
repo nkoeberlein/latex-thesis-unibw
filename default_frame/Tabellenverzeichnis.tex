@@ -1,0 +1,37 @@
+% Modernes Tabellenverzeichnis
+% Optimiert für LuaLaTeX und KOMA-Script
+
+% === Sauberer Seitenumbruch ===
+\clearpage
+\cleardoublepage
+
+% === Spezielle Formatierung für Abbildungsverzeichnis ===
+\begingroup
+\let\cleardoublepage\relax
+\let\clearpage\relax
+
+% === Institution Logo ===
+\begin{figure}[t]
+  \vspace{1.5cm}
+  \begin{flushright}
+    \IfFileExists{default_style/AtheneGespiegelt.png}{%
+      \includegraphics[width=0.1\textwidth]{default_style/AtheneGespiegelt.png}%
+    }{%
+      \textcolor{secondary}{\rule{0.1\textwidth}{0.1\textwidth}}%
+    }
+  \end{flushright}
+  \vspace{-4.5cm}
+\end{figure}
+
+% === Header-Markierung für Kopfzeile ===
+\markright{Tabellenverzeichnis}
+
+% === Standard Tabellenverzeichnis ===
+\listoftables
+
+\endgroup
+
+% === Seitenfüllung und Abschluss ===
+\vspace*{\fill}
+\clearpage
+\thispagestyle{empty}

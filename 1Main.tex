@@ -1,0 +1,139 @@
+% !TEX root = ./1Main.tex
+% !TEX program = lualatex
+% ===================================================================
+% Moderne LaTeX-Vorlage für wissenschaftliche Arbeiten
+% Optimiert für LuaLaTeX - Universität der Bundeswehr München
+% ===================================================================
+%
+% WICHTIG: Kompilierung mit LuaLaTeX erforderlich!
+% Befehl: lualatex --shell-escape 1Main.tex
+%
+% Vollständige Kompilierung:
+% 1. lualatex --shell-escape 1Main.tex
+% 2. makeglossaries 1Main
+% 3. biber 1Main
+% 4. lualatex --shell-escape 1Main.tex
+% 5. lualatex --shell-escape 1Main.tex
+%
+% ===================================================================
+
+% === Core-System laden ===
+\input{default_style/load_all}
+
+% Farben für Hervorhebungen definieren
+\definecolor{gray}{rgb}{0.9, 0.9, 0.9}
+
+% === Wasserzeichen für Entwürfe (optional aktivieren) ===
+% \input{default_style/watermark}
+
+% === Zusätzliche Pakete (bei Bedarf) ===
+\usepackage{float}  % Präzise Positionierung von Floats
+
+% === Bibliographie-Ressource ===
+\addbibresource{bibliography/references.bib}
+
+% === Glossaries aktivieren ===
+\makeglossaries
+
+% === Glossar-Einträge laden ===
+\input{content/allgemein/Glossar}
+
+% === Bibliographie-Kategorien (optional) ===
+\DeclareBibliographyCategory{abbildung}
+
+% ===================================================================
+% === DOKUMENT BEGINNT HIER ===
+% ===================================================================
+
+\begin{document}
+
+% === Frontmatter (vor dem Hauptteil) ===
+
+% Titelseite (UniBw München Layout)
+\input{default_frame/Titelseite}
+
+% Optional: Weitere Frontmatter-Inhalte
+%\input{content/allgemein/Aufgabenstellung}         % Nur bei Bachelor-/Masterarbeiten
+\input{content/allgemein/Abstract}                   % Abstract (empfohlen)
+%\input{content/allgemein/Danksagung}                % Optional
+
+% === Verzeichnisse ===
+\input{default_frame/Inhaltsverzeichnis}             % Inhaltsverzeichnis (erforderlich)
+\include{default_frame/Abbildungsverzeichnis}        % Bei Bedarf aktivieren
+\include{default_frame/Tabellenverzeichnis}          % Bei Bedarf aktivieren
+\include{default_frame/Abkuerzungsverzeichnis}       % Bei Bedarf aktivieren
+
+% === Hauptteil: Seitennummerierung arabisch ===
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+% === Hauptkapitel der Arbeit ===
+% Passen Sie diese an Ihre Arbeit an!
+
+\input{content/Einleitung}
+\newpage
+
+\input{content/Grundlagen}
+\newpage
+
+\input{content/Hauptteil}
+\newpage
+
+% Weitere Kapitel nach Bedarf hinzufügen:
+% \input{content/Evaluation}
+% \newpage
+% \input{content/RelatedWork}
+% \newpage
+
+\input{content/Schluss}
+
+% === Bibliographie ===
+
+% Optional: Quellen von Abbildungen als eigene Kategorie
+% \nocite{}
+% \addtocategory{abbildung}{quelle1,quelle2,quelle3}
+
+\input{default_frame/Literaturverzeichnis}
+% \input{default_frame/Abbildungsquellenverzeichnis}  % Falls Bildquellen getrennt
+
+% === Anhang ===
+\appendix
+\renewcommand{\chaptername}{Anhang}
+
+\input{default_frame/Glossar}
+\input{content/Code.tex}                              % Code-Beispiele
+
+% Weitere Anhänge nach Bedarf:
+% \input{content/AnhangZusatzdaten}
+% \input{content/AnhangFrageboegen}
+
+% === Eidesstattliche Erklärung (UniBw München) ===
+\input{default_frame/SelbststaendigkeitserklaerungUniBwM}
+
+\end{document}
+
+% ===================================================================
+% HINWEISE ZUR ANPASSUNG:
+%
+% 1. Titelseite:
+%    - Öffnen Sie default_frame/Titelseite.tex
+%    - Passen Sie Titel, Studiengang, Betreuer, Datum an
+%
+% 2. Kapitel hinzufügen/entfernen:
+%    - Erstellen Sie neue .tex-Dateien in content/
+%    - Binden Sie diese mit \input{content/NeuesKapitel} ein
+%
+% 3. Bibliographie:
+%    - Fügen Sie Quellen in bibliography/references.bib hinzu
+%    - Zitieren Sie mit \cite{key}
+%
+% 4. Glossar:
+%    - Definieren Sie Begriffe in content/allgemein/Glossar.tex
+%    - Verwenden Sie \gls{begriff} im Text
+%
+% 5. Code-Highlighting:
+%    - Nutzen Sie minted für Code-Listings
+%    - Unterstützt 300+ Sprachen
+%    - Siehe content/Code.tex für Beispiele
+%
+% ===================================================================

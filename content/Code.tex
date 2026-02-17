@@ -1,0 +1,205 @@
+% !TEX root = ../1Main.tex
+% Code-Beispiele im Anhang
+
+\chapter{Code-Beispiele}
+\label{chap:code-beispiele}
+
+% ===================================================================
+% ANLEITUNG: Dies ist ein Beispielanhang für Code-Listings.
+% Diese Vorlage nutzt 'minted' für Syntax-Highlighting.
+% WICHTIG: Kompilierung mit --shell-escape erforderlich!
+% ===================================================================
+
+Dieser Anhang demonstriert verschiedene Code-Listings mit dem modernen \texttt{minted}-Paket, das über 300 Programmiersprachen unterstützt.
+
+\section{Python-Beispiel}
+\label{sec:python-code}
+
+Listing \ref{lst:python-beispiel} zeigt ein einfaches Python-Programm mit Syntax-Highlighting.
+
+\begin{listing}[htbp]
+\begin{minted}[
+    linenos,
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=gray!10,
+    fontsize=\footnotesize
+]{python}
+def fibonacci(n):
+    """
+    Berechnet die n-te Fibonacci-Zahl rekursiv.
+    
+    Args:
+        n: Index der Fibonacci-Zahl
+        
+    Returns:
+        Die n-te Fibonacci-Zahl
+    """
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# Hauptprogramm
+if __name__ == "__main__":
+    for i in range(10):
+        print(f"F({i}) = {fibonacci(i)}")
+\end{minted}
+\caption{Python-Implementierung der Fibonacci-Funktion}
+\label{lst:python-beispiel}
+\end{listing}
+
+\section{Java-Beispiel}
+\label{sec:java-code}
+
+Listing \ref{lst:java-beispiel} demonstriert objektorientierte Programmierung in Java.
+
+\begin{listing}[htbp]
+\begin{minted}[
+    linenos,
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=gray!10,
+    fontsize=\footnotesize
+]{java}
+public class HelloWorld {
+    private String message;
+    
+    /**
+     * Konstruktor
+     */
+    public HelloWorld(String message) {
+        this.message = message;
+    }
+    
+    /**
+     * Gibt die Nachricht aus
+     */
+    public void printMessage() {
+        System.out.println(message);
+    }
+    
+    public static void main(String[] args) {
+        HelloWorld hello = new HelloWorld("Hello, World!");
+        hello.printMessage();
+    }
+}
+\end{minted}
+\caption{Java Hello World mit Klassen}
+\label{lst:java-beispiel}
+\end{listing}
+
+\section{Scala-Beispiel}
+\label{sec:scala-code}
+
+Listing \ref{lst:scala-beispiel} zeigt funktionale Programmierung in Scala.
+
+\begin{listing}[htbp]
+\begin{minted}[
+    linenos,
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=gray!10,
+    fontsize=\footnotesize
+]{scala}
+// Funktionale Programmierung in Scala
+object FunctionalExample {
+  // Higher-order functions
+  def applyTwice(f: Int => Int, x: Int): Int = {
+    f(f(x))
+  }
+  
+  // Pattern Matching
+  def describe(x: Any): String = x match {
+    case i: Int if i > 0 => "positive integer"
+    case i: Int if i < 0 => "negative integer"
+    case 0 => "zero"
+    case s: String => s"string: $s"
+    case _ => "something else"
+  }
+  
+  def main(args: Array[String]): Unit = {
+    val increment = (x: Int) => x + 1
+    println(applyTwice(increment, 5))  // Output: 7
+    println(describe(42))              // Output: positive integer
+  }
+}
+\end{minted}
+\caption{Scala Beispiel mit funktionaler Programmierung}
+\label{lst:scala-beispiel}
+\end{listing}
+
+\section{JSON-Datei}
+\label{sec:json-code}
+
+Auch Konfigurationsdateien können formatiert werden:
+
+\begin{listing}[htbp]
+\begin{minted}[
+    linenos,
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=gray!10,
+    fontsize=\footnotesize
+]{json}
+{
+  "name": "example-project",
+  "version": "1.0.0",
+  "dependencies": {
+    "react": "^18.0.0",
+    "typescript": "^5.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  }
+}
+\end{minted}
+\caption{package.json Beispiel}
+\label{lst:json-beispiel}
+\end{listing}
+
+\section{Shell-Script}
+\label{sec:bash-code}
+
+\begin{listing}[htbp]
+\begin{minted}[
+    linenos,
+    frame=lines,
+    framesep=2mm,
+    baselinestretch=1.2,
+    bgcolor=gray!10,
+    fontsize=\footnotesize
+]{bash}
+#!/bin/bash
+# Kompilierungs-Script für LaTeX
+
+echo "Starting LaTeX compilation..."
+
+# Erste Kompilierung
+lualatex --shell-escape 1Main.tex
+
+# Glossaries erstellen
+makeglossaries 1Main
+
+# Bibliographie erstellen
+biber 1Main
+
+# Erneute Kompilierungen für Referenzen
+lualatex --shell-escape 1Main.tex
+lualatex --shell-escape 1Main.tex
+
+echo "Compilation complete!"
+\end{minted}
+\caption{Bash-Script für LaTeX-Kompilierung}
+\label{lst:bash-beispiel}
+\end{listing}
+
+% ===================================================================
+% HINWEIS: Fügen Sie Ihren eigenen Code hier ein!
+% Unterstützte Sprachen: Python, Java, C, C++, JavaScript, Scala,
+% Rust, Go, Ruby, PHP, SQL, HTML, CSS, und viele mehr!
+% ===================================================================

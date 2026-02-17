@@ -1,0 +1,152 @@
+% Modernes Inhaltsverzeichnis und Schriftarten für LuaLaTeX
+% Nutzt fontspec statt veralteter Font-Befehle
+
+% --- TOC-Paket (tocbasic ist bereits in KOMA enthalten) ---
+% tocbasic wird automatisch von KOMA-Script geladen, explizit ist nicht nötig
+% \usepackage{tocbasic}  % Bereits integriert
+
+% --- KRITISCH: Alle \fontfamily{phv} ENTFERNT! ---
+% Diese funktionieren nicht mit LuaLaTeX + fontspec!
+% Die Sans-Serif-Einstellung erfolgt bereits in Schriftart-settings.tex
+
+% --- Moderne Schriftart-Definitionen für Strukturelemente ---
+% Da wir bereits Sans-Serif als Standard haben, nur noch Gewichtung/Größe anpassen
+
+% === Hauptstruktur (Kapitel, Sections) ===
+\addtokomafont{disposition}{\bfseries}           % Alle Gliederungselemente fett
+\addtokomafont{chapter}{\LARGE\bfseries\color{headingcolor}}
+\addtokomafont{section}{\Large\bfseries\color{headingcolor}}
+\addtokomafont{subsection}{\large\bfseries\color{headingcolor}}
+\addtokomafont{subsubsection}{\normalsize\bfseries\color{headingcolor}}
+\addtokomafont{paragraph}{\normalsize\bfseries\color{headingcolor}}
+\addtokomafont{subparagraph}{\small\bfseries\color{headingcolor}}
+
+% === Titelseite ===
+\addtokomafont{title}{\huge\bfseries\color{headingcolor}}
+\addtokomafont{author}{\Large\color{secondary}}
+\addtokomafont{date}{\large\color{secondary}}
+
+% === Kopf- und Fußzeile ===
+\addtokomafont{pageheadfoot}{\small\color{secondary}}
+\addtokomafont{pagehead}{\small\color{secondary}}
+\addtokomafont{pagefoot}{\footnotesize\color{secondary}}
+\addtokomafont{pagenumber}{\small\bfseries}
+
+% === Beschriftungen ===
+\addtokomafont{caption}{\small\color{secondary}}
+\addtokomafont{captionlabel}{\small\bfseries\color{headingcolor}}
+
+% === Listen und Beschreibungen ===
+\addtokomafont{descriptionlabel}{\bfseries\color{headingcolor}}
+
+% === Fußnoten ===
+\addtokomafont{footnote}{\footnotesize}
+\addtokomafont{footnotelabel}{\footnotesize\bfseries}
+\addtokomafont{footnotereference}{\footnotesize}
+
+% === Inhaltsverzeichnis-spezifische Anpassungen ===
+\addtokomafont{chapterentry}{\bfseries\color{headingcolor}}
+\addtokomafont{chapterentrypagenumber}{\bfseries}
+
+% --- Moderne TOC-Konfiguration ---
+\KOMAoptions{
+  toc=chapterentrywithdots,      % Punkte auch bei Kapiteln
+  toc=flat                       % Flache Hierarchie (modern)
+  %listof=chapterentry            % Verzeichnisse wie Kapitel
+}
+
+% --- Erweiterte TOC-Anpassungen (vereinfacht) ---
+% Abstände und Layout - VEREINFACHT da problematisch
+
+% \RedeclareSectionCommand[
+%   tocindent=0pt,                 % Keine Einrückung
+%   tocnumwidth=2.5em,             % Breitere Nummern
+%   tocentryformat=\bfseries       % Fette Einträge
+% ]{chapter}
+
+% \RedeclareSectionCommand[
+%   tocindent=1.5em,
+%   tocnumwidth=2.3em
+% ]{section}
+
+% \RedeclareSectionCommand[
+%   tocindent=3.8em,
+%   tocnumwidth=3.2em,
+%   tocentryformat=\small          % Kleinere Subsections
+% ]{subsection}
+
+% --- Moderne Verzeichnis-Titel (polyglossia-kompatibel) ---
+% Manuelle Definition da polyglossia statt babel verwendet wird
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
+
+% Weitere deutsche Bezeichnungen
+\renewcommand{\figurename}{Abbildung}
+\renewcommand{\tablename}{Tabelle}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\appendixname}{Anhang}
+
+% --- Custom TOC-Styles (optional) ---
+% Für noch moderneres Design - auskommentiert da problematisch
+% \newcommand{\moderntocformat}{%
+%   \renewcommand*{\@pnumwidth}{2em}     % Seitenzahl-Breite
+%   \renewcommand*{\@tocrmarg}{2.5em}    % Rechter Rand
+%   \renewcommand*{\@dotsep}{1.5}        % Punktabstand
+% }
+
+% Aktiviere moderne Formatierung - DEAKTIVIERT
+% \AtBeginDocument{\moderntocformat}
+
+% --- Farb-Integration (vereinfacht) ---
+% Links im TOC - DEAKTIVIERT da problematisch
+% \makeatletter
+% \renewcommand*\l@chapter[2]{%
+%   \ifnum \c@tocdepth >\m@ne
+%     \addpenalty{-\@highpenalty}%
+%     \vskip 1.0em \@plus\p@
+%     \setlength\@tempdima{1.5em}%
+%     \begingroup
+%       \parindent \z@ \rightskip \@pnumwidth
+%       \parfillskip -\@pnumwidth
+%       \leavevmode \bfseries\color{headingcolor}
+%       \advance\leftskip\@tempdima
+%       \hskip -\leftskip
+%       #1\nobreak\hfil \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+%       \penalty\@highpenalty
+%     \endgroup
+%   \fi}
+% \makeatother
+
+% --- Alternative: Moderne TOC mit tocloft ---
+% \usepackage{tocloft}
+% \renewcommand{\cftchapfont}{\bfseries\color{headingcolor}}
+% \renewcommand{\cftsecfont}{\color{headingcolor}}
+% \renewcommand{\cftsubsecfont}{\small\color{secondary}}
+
+% --- Erweiterte Verzeichnisse ---
+% Für Code-Listings
+\makeatletter
+\@ifpackageloaded{listings}{%
+  \renewcommand{\lstlistlistingname}{Codeverzeichnis}
+  \addtokomafont{lstlistingname}{\bfseries\color{headingcolor}}
+}{}
+\makeatother
+
+% --- Abkürzungsverzeichnis Integration ---
+\makeatletter
+\@ifpackageloaded{glossaries}{%
+  \renewcommand{\glossaryname}{Glossar}
+  \renewcommand{\acronymname}{Abkürzungsverzeichnis}
+}{}
+\makeatother
+
+% --- Debug-Ausgabe ---
+\AtBeginDocument{%
+  \typeout{=== TOC-Style konfiguriert ===}
+  \typeout{Font-System: fontspec (modern)}
+  \typeout{Schrift: Sans-Serif durchgängig}
+  \typeout{Farben: Integriert mit Farbschema}
+  \typeout{Layout: KOMA + moderne Anpassungen}
+  \typeout{=================================}
+}

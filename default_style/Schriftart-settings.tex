@@ -1,0 +1,87 @@
+% Moderne Schriftart-Einstellungen für LuaLaTeX
+% DIN 5008 konform - Serifenlose Schrift für Geschäftsdokumente
+
+% --- Font-Paket für LuaLaTeX ---
+\usepackage{fontspec}
+
+% --- Hauptschriftarten definieren (moderne Sans-Serif) ---
+% Option 1: System-Fonts (empfohlen)
+\IfFontExistsTF{Arial}{
+    %\setmainfont{Arial}[
+    %    Scale=1.0,
+    %    Ligatures=TeX,
+    %]
+    \setmainfont{Bookerly}[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = Bookerly-Regular,
+    BoldFont = Bookerly-Bold,
+    ItalicFont = Bookerly-RegularItalic,
+    BoldItalicFont = Bookerly-BoldItalic
+]
+}{
+    % Fallback: TeX Gyre Heros (Helvetica-Clone, immer verfügbar)
+    \setmainfont{TeX Gyre Heros}[
+        Scale=1.0,
+        Ligatures=TeX,
+        UprightFont=*-Regular,
+        BoldFont=*-Bold,
+        ItalicFont=*-Italic,
+        BoldItalicFont=*-BoldItalic,
+    ]
+}
+
+% Sans-Serif als Standard (DIN 5008)
+\renewcommand{\familydefault}{\sfdefault}
+
+% --- Monospace-Font für Code ---
+\IfFontExistsTF{Consolas}{
+    \setmonofont{Consolas}[Scale=0.9]
+}{
+    \IfFontExistsTF{DejaVu Sans Mono}{
+        \setmonofont{DejaVu Sans Mono}[Scale=0.9]
+    }{
+        \IfFontExistsTF{Liberation Mono}{
+            \setmonofont{Liberation Mono}[Scale=0.9]
+        }{
+            \setmonofont{TeX Gyre Cursor}[Scale=0.9]
+        }
+    }
+}
+
+% --- Schriftgröße und Zeilenabstand ---
+\usepackage[12pt]{extsizes} % Falls nicht schon in documentclass definiert
+% Alternativ: \fontsize{12}{14.4pt}\selectfont % 1.2x line spacing
+
+% --- Moderne Typografie-Optimierung ---
+\usepackage{microtype}
+\microtypesetup{
+    protrusion=true,    % Randausgleich
+    expansion=true,     % Font-Expansion
+}
+
+% --- Trennverhalten (gemäßigter als Original) ---
+\tolerance=2000                       % Moderatere Fehlertoleranz
+\emergencystretch=1em                 % Weniger aggressive Dehnung
+\hyphenpenalty=5000                   % Erlaubt kontrollierte Trennungen
+\clubpenalty=10000                    % Verhindert Schusterjungen
+\widowpenalty=10000                   % Verhindert Hurenkinder
+\displaywidowpenalty=10000           % Für Formeln
+
+% --- Feintuning (reduziert) ---
+\hfuzz=0.5pt                         % Engere Toleranz
+\vfuzz=1pt                           
+\hbadness=2000                       % Realistischere Schwellwerte
+\vbadness=2000
+
+% --- Alternative Schriftarten (auskommentiert) ---
+% Für verschiedene Designs:
+% \setmainfont{Helvetica}[
+%    SizeFeatures = {
+%        {Size = 12, Linespacing = 1.417}
+%    }
+%]
+% \setmainfont{Source Sans Pro}    % Adobe, sehr lesbar
+% \setmainfont{Fira Sans}          % Mozilla, modern
+% \setmainfont{Open Sans}          % Google, web-optimiert
+% \setmainfont{Roboto}             % Google Material Design

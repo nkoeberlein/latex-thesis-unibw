@@ -1,0 +1,85 @@
+% Moderne Titelseite
+% Universität der Bundeswehr München
+
+% === Seitennummerierung für Vorspann ===
+\pagenumbering{Roman}
+
+% === Temporäre Seitenränder für Titelseite ===
+\newgeometry{
+    left=2cm,
+    right=2cm,
+    top=2cm,
+    bottom=2cm,
+}
+
+% === Titelseite ===
+\begin{titlepage}
+    % === Universitäts-Header ===
+    \begin{center}
+        \vspace*{-1.2cm}
+        \IfFileExists{default_style/Signet_UniBw.pdf}{%
+            \includegraphics[scale=0.95]{default_style/Signet_UniBw.pdf}%
+        }{%
+            \textcolor{secondary}{\rule{8cm}{3cm}}%
+            \PackageWarning{titelseite}{Logo Signet_UniBw.pdf nicht gefunden}%
+        }
+        
+        \Large
+        \textsc{
+            Fakultät Informatik\\
+            [0.2cm]
+            Institut für Angewandte Informatik\\
+            [0.2cm]
+            Professur für Softwarewerkzeuge und\\ Methoden für Integrierte Anwendungen\\
+            [0.2cm]
+            Prof. Dr.-Ing. Andreas Karcher
+        }
+    \end{center}
+    
+    \vfill
+    
+    % === Arbeitstitel ===
+    \begin{center}
+        \Large
+        Bachelor-Thesis \\ % ÄNDERN: Bachelor/Master/Dissertation
+        %[0.4cm]\Large zur Erlangung des akademischen Grades\\Bachelor of Science\\
+        %[0.4cm]
+        \Large
+        zum Thema\\
+        \vfill
+        
+        \huge
+        \textbf{[Titel Ihrer Arbeit]} % ÄNDERN: Setzen Sie hier Ihren Titel ein
+        \vfill
+        
+        \Large
+        von\\
+        [0.4cm]
+        \textbf{Nikolaus Köberlein}\\
+        [0.4cm]
+        Studiengang Informatik 2023\\  % ÄNDERN: Ihr Studiengang und Jahr
+        Matrikelnummer 1231753\\       % ÄNDERN: Ihre Matrikelnummer
+    \end{center}
+    
+    \vfill
+    
+    % === Betreuungs-Informationen ===
+    \begin{center} 
+        \Large
+        \begin{tabular}{ l l }
+            Aufgabensteller         & Prof. Dr.-Ing. Andreas Karcher\\     % ÄNDERN
+            Zweitgutachter            & Dr. Peter Hillmann\\                  % ÄNDERN
+            Betreuer:                     & Dr.-Ing. Mario Kesseler\\              % ÄNDERN
+            \\
+            Tag der Einreichung: & \today, Neubiberg\\              % Automatisches Datum
+        \end{tabular}
+    \end{center}
+\end{titlepage}
+
+% === Ursprüngliche Randeinstellungen wiederherstellen ===
+\restoregeometry
+
+% === Leerseite für doppelseitigen Druck ===
+\newpage
+\thispagestyle{empty}
+\section*{ }

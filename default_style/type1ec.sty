@@ -1,0 +1,117 @@
+% Ersatz für type1ec.sty - LuaLaTeX-kompatibel
+% WARNUNG: Original type1ec.sty ist NICHT kompatibel mit LuaLaTeX + fontspec!
+
+\ProvidesPackage{type1ec}[2025/01/01 v2.0 LuaLaTeX-kompatible Version]
+
+% --- Engine-Erkennung ---
+\RequirePackage{iftex}
+
+\ifLuaTeX
+  % === LUALATEX: Verwende fontspec statt NFSS ===
+  \PackageInfo{type1ec}{%
+    LuaTeX detected. Using fontspec instead of legacy NFSS font definitions.%
+  }
+  
+  % Stelle sicher, dass fontspec geladen ist
+  \@ifpackageloaded{fontspec}{}{%
+    \RequirePackage{fontspec}
+  }
+  
+  % Computer Modern Super als OpenType verwenden (falls verfügbar)
+  \IfFontExistsTF{CMU Serif}{%
+    \PackageInfo{type1ec}{Using CMU fonts (OpenType Computer Modern)}%
+    % CMU = Computer Modern Unicode (moderne OpenType-Version)
+    \setmainfont{CMU Serif}[
+      BoldFont=CMU Serif Bold,
+      ItalicFont=CMU Serif Italic,
+      BoldItalicFont=CMU Serif Bold Italic,
+      Ligatures=TeX
+    ]
+    \setsansfont{CMU Sans Serif}[
+      BoldFont=CMU Sans Serif Bold,
+      ItalicFont=CMU Sans Serif Oblique,
+      BoldItalicFont=CMU Sans Serif Bold Oblique,
+      Ligatures=TeX
+    ]
+    \setmonofont{CMU Typewriter Text}[
+      BoldFont=CMU Typewriter Text Bold,
+      ItalicFont=CMU Typewriter Text Italic,
+      BoldItalicFont=CMU Typewriter Text Bold Italic,
+      Ligatures=TeX
+    ]
+  }{%
+    % Fallback: Latin Modern (immer verfügbar)
+    \PackageInfo{type1ec}{Using Latin Modern fonts (fallback)}%
+    \setmainfont{Latin Modern Roman}[
+      Ligatures=TeX
+    ]
+    \setsansfont{Latin Modern Sans}[
+      Ligatures=TeX
+    ]
+    \setmonofont{Latin Modern Mono}[
+      Ligatures=TeX
+    ]
+  }
+  
+  % Alle alten Font-Befehle ignorieren
+  \let\EC@family\@gobblefive
+  \let\EC@ttfamily\@gobblefive
+  
+  % Definition für \@gobblefive (falls nicht vorhanden)
+  \providecommand{\@gobblefive}[5]{}
+  
+\else
+  % === ANDERE ENGINES: Original-Verhalten (aber warnen) ===
+  \PackageWarning{type1ec}{%
+    This package is optimized for LuaLaTeX. 
+    For pdfLaTeX, consider using the original type1ec.sty
+  }
+  
+  % Originale Definitionen (vereinfacht)
+  \DeclareOption{10pt}{%
+    \providecommand{\EC@family}[5]{\DeclareFontShape{#1}{#2}{#3}{#4}{<->#51000}{}}%
+    \providecommand{\EC@ttfamily}[5]{\DeclareFontShape{#1}{#2}{#3}{#4}{<->#51000}{}}%
+  }
+  \ProcessOptions
+  
+  \providecommand{\EC@family}[5]{%
+    \DeclareFontShape{#1}{#2}{#3}{#4}{%
+    <-6>#50500%
+    <6-7>#50600%
+    <7-8>#50700%
+    <8-9>#50800%
+    <9-10>#50900%
+    <10-10.95>#51000%
+    <10.95-12>#51095%
+    <12-14.4>#51200%
+    <14.4-17.28>#51440%
+    <17.28-20.74>#51728%
+    <20.74-24.88>#52074%
+    <24.88-29.86>#52488%
+    <29.86-35.83>#52986%
+    <35.83->#53583%
+  }{}}
+  
+  \providecommand{\EC@ttfamily}[5]{%
+    \DeclareFontShape{#1}{#2}{#3}{#4}{%
+    <-9>#50800%
+    <9-10>#50900%
+    <10-10.95>#51000%
+    <10.95-12>#51095%
+    <12-14.4>#51200%
+    <14.4-17.28>#51440%
+    <17.28-20.74>#51728%
+    <20.74-24.88>#52074%
+    <24.88-29.86>#52488%
+    <29.86-35.83>#52986%
+    <35.83->#53583%
+  }{}}
+  
+  % Lade Font-Definitionen nur für non-LuaTeX
+  \begingroup
+  \nfss@catcodes
+  \InputIfFileExists{t1cmr.fd}{}{\PackageWarning{type1ec}{t1cmr.fd not found}}
+  \endgroup
+\fi
+
+\endinput

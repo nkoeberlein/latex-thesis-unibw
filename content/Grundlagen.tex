@@ -1,0 +1,135 @@
+% !TEX root = ../1Main.tex
+% Grundlagen - Template/Beispielkapitel
+
+\chapter{Grundlagen}
+\label{chap:grundlagen}
+
+% ===================================================================
+% ANLEITUNG: Definieren Sie hier die theoretischen Grundlagen.
+% Dieses Kapitel zeigt Beispiele für verschiedene Formatierungen.
+% ===================================================================
+
+In diesem Kapitel werden die theoretischen Grundlagen und wichtige Begriffe eingeführt, die zum Verständnis der Arbeit notwendig sind.
+
+\section{Begriffsdefinitionen}
+\label{sec:begriffe}
+
+Wichtige Begriffe sollten klar definiert werden. Sie können dafür die Definition-Umgebung nutzen:
+
+\begin{definition}[Wichtiger Begriff]
+    \label{def:beispiel}
+    Ein \textbf{wichtiger Begriff} beschreibt \dots
+\end{definition}
+
+Später können Sie auf die Definition verweisen: Wie in \autoref{def:beispiel} definiert, beschreibt \dots
+
+\subsection{Weitere Begriffe}
+
+\begin{definition}[Zweiter Begriff]
+    \label{def:zweiter-begriff}
+    Diese Definition zeigt einen weiteren wichtigen Begriff.
+\end{definition}
+
+\section{Theoretischer Hintergrund}
+\label{sec:theorie}
+
+Hier beschreiben Sie die relevanten Theorien und Konzepte. Literaturverweise sind wichtig für wissenschaftliche Arbeiten.
+
+\subsection{Grundlegende Konzepte}
+
+Das Konzept X wurde erstmals in der Literatur beschrieben und später erweitert. Die wichtigsten Eigenschaften sind:
+\begin{itemize}
+    \item Eigenschaft 1: Beschreibung
+    \item Eigenschaft 2: Beschreibung
+    \item Eigenschaft 3: Beschreibung
+\end{itemize}
+
+\subsection{Verwandte Arbeiten}
+
+Verwandte Arbeiten in diesem Bereich umfassen verschiedene Ansätze. Eine tabellarische Übersicht kann hilfreich sein:
+
+\begin{table}[htbp]
+    \centering
+    \caption{Vergleich existierender Ansätze}
+    \label{tab:vergleich-ansaetze}
+    \begin{tabular}{lccc}
+        \toprule
+        \textbf{Ansatz} & \textbf{Vorteil} & \textbf{Nachteil} & \textbf{Jahr} \\
+        \midrule
+        Ansatz A & Schnell & Ungenau & 2020 \\
+        Ansatz B & Genau & Langsam & 2021 \\
+        Ansatz C & Ausgewogen & Komplex & 2022 \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Wie in \autoref{tab:vergleich-ansaetze} dargestellt, haben alle Ansätze spezifische Vor- und Nachteile.
+
+\section{Mathematische Grundlagen}
+\label{sec:mathematik}
+
+Falls Ihre Arbeit mathematische Formeln enthält, können Sie diese inline darstellen $f(x) = x^2 + 2x + 1$ oder als separate Gleichung:
+
+\begin{equation}
+    \label{eq:beispiel}
+    f(x) = \sum_{i=0}^{n} a_i x^i
+\end{equation}
+
+Verweise auf Gleichungen erfolgen mit \autoref{eq:beispiel}.
+
+Für mehrzeilige Gleichungen nutzen Sie die \texttt{align}-Umgebung:
+
+\begin{align}
+    y &= mx + b \\
+    \frac{dy}{dx} &= m
+\end{align}
+
+\subsection{Wichtige Theoreme}
+
+\begin{satz}[Beispielsatz]
+    \label{satz:beispiel}
+    Für alle $x \in \mathbb{R}$ gilt: $x^2 \geq 0$
+\end{satz}
+
+\begin{lemma}
+    \label{lemma:beispiel}
+    Dies ist ein Beispiel für ein Lemma, das als Hilfssatz dient.
+\end{lemma}
+
+\section{Technologische Grundlagen}
+\label{sec:technologie}
+
+Beschreiben Sie hier relevante Technologien, Frameworks oder Werkzeuge.
+
+\subsection{Technologie A}
+
+Technologie A bietet folgende Features:
+\begin{enumerate}
+    \item Feature 1
+    \item Feature 2
+    \item Feature 3
+\end{enumerate}
+
+\subsection{Technologie B}
+
+Technologie B wird verwendet, weil \dots
+
+% Beispiel für Code in den Grundlagen (kurzer Ausschnitt)
+Code-Beispiele können inline mit \texttt{variable = 42} oder als Block formatiert werden.
+
+\section{Zusammenfassung}
+\label{sec:grundlagen-zusammenfassung}
+
+Dieses Kapitel hat folgende Aspekte behandelt:
+\begin{itemize}
+    \item Wichtige Begriffsdefinitionen (\autoref{sec:begriffe})
+    \item Theoretischer Hintergrund (\autoref{sec:theorie})
+    \item Mathematische Grundlagen (\autoref{sec:mathematik})
+    \item Technologische Grundlagen (\autoref{sec:technologie})
+\end{itemize}
+
+Diese Grundlagen bilden die Basis für die weiteren Kapitel dieser Arbeit.
+
+% ===================================================================
+% HINWEIS: Passen Sie die Inhalte an Ihr Thema an!
+% ===================================================================

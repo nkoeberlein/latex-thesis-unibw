@@ -1,0 +1,52 @@
+% Einfache Kopf- und Fußzeilen für LuaLaTeX
+% Vereinfacht um sl@RemoveGobble Fehler zu vermeiden
+
+% --- Grundlegendes KOMA-Script Page-Layout ---
+\usepackage[
+  automark,                    % Automatische Markierungen
+  headsepline                  % Linie unter Kopfzeile
+]{scrlayer-scrpage}
+
+% --- Seitenstil definieren ---
+\pagestyle{scrheadings}
+
+% --- Alle Einstellungen zurücksetzen ---
+\clearscrheadings
+\clearscrplain
+
+% --- Einfache Kopfzeilen-Konfiguration ---
+% Zweiseitig: Links = Kapitel, Rechts = Abschnitt
+
+% Gerade Seiten (links)
+\lehead{\rightmark}
+\rehead{}
+
+% Ungerade Seiten (rechts)  
+\lohead{}
+\rohead{\leftmark}
+
+% --- Einfache Fußzeilen-Konfiguration ---
+% Seitenzahlen außen
+
+% Gerade Seiten
+\lefoot{\pagemark}
+\refoot{}
+
+% Ungerade Seiten
+\lofoot{}
+\rofoot{\pagemark}
+
+% --- Plain-Style für Kapitelanfänge ---
+\lefoot[\pagemark]{\pagemark}
+\rofoot[\pagemark]{\pagemark}
+
+% --- Automark-Konfiguration ---
+\automark[section]{chapter}
+
+% --- Debug-Information ---
+\AtBeginDocument{%
+  \typeout{=== Kopf-/Fußzeilen (vereinfacht) ===}
+  \typeout{Paket: scrlayer-scrpage (basic)}
+  \typeout{Stil: Zweiseitig ohne Farben}
+  \typeout{=====================================}
+}

@@ -1,0 +1,335 @@
+% Moderner Ersatz für picins.sty
+% Verwendet moderne, LuaLaTeX-kompatible Pakete statt der veralteten picins-Lösung
+
+\ProvidesPackage{picins}[2025/01/01 v4.0 Modern picture insertion replacement]
+\NeedsTeXFormat{LaTeX2e}
+
+% --- WARNUNG ---
+\PackageWarning{picins}{%
+  This is a modern replacement for the obsolete picins.sty (1992).
+  Original picins is incompatible with LuaLaTeX and modern LaTeX.
+  Using wrapfig, adjustbox, and tcolorbox instead.
+}
+
+% --- Moderne Pakete laden ---
+\RequirePackage{wrapfig}      % Textumfluss um Bilder
+\RequirePackage{adjustbox}    % Flexible Bildanpassung  
+\RequirePackage{tcolorbox}    % Moderne Boxen mit Rahmen/Schatten
+\RequirePackage{calc}         % Berechnungen
+\RequirePackage{ifthen}       % Bedingungen
+
+% --- TColorBox für Rahmen/Schatten ---
+\tcbuselibrary{skins}
+
+% --- Kompatibilitäts-Variablen ---
+\newlength{\d@breite}
+\newlength{\d@hoehe}
+\newlength{\d@shad}
+\newlength{\d@dash}
+\newlength{\d@boxl}
+\newlength{\d@pichskip}
+
+% Standard-Werte (kompatibel mit Original)
+\setlength{\d@shad}{4pt}
+\setlength{\d@dash}{4pt}
+\setlength{\d@boxl}{10pt}
+\setlength{\d@pichskip}{1em}
+
+% --- Kompatibilitäts-Befehle ---
+\newcommand{\pichskip}[1]{\setlength{\d@pichskip}{#1}}
+\newcommand{\shadowthickness}[1]{\setlength{\d@shad}{#1}}
+\newcommand{\dashlength}[1]{\setlength{\d@dash}{#1}}
+\newcommand{\boxlength}[1]{\setlength{\d@boxl}{#1}}
+
+% Dummy-Befehle (nicht mehr relevant)
+\newcommand{\picchangemode}{}
+\newcommand{\nopicchangemode}{}
+
+% --- Moderne Bild-Einbindung ---
+% Ersetzt komplexes \parpic durch einfaches wrapfig
+
+\newcommand{\parpic}[1][l]{%
+  \@ifnextchar({\@parpic@with@size[#1]}{\@parpic@simple[#1]}%
+}
+
+% Einfache Version (ohne Größenangabe)
+\newcommand{\@parpic@simple}[2][l]{%
+  \@ifnextchar[{\@parpic@with@options[#1]{#2}}{\@parpic@basic[#1]{#2}{}}%
+}
+
+% Mit Optionen
+\newcommand{\@parpic@with@options}[4][l]{%
+  \@parpic@create[#1]{#2}{#3}{#4}%
+}
+
+% Mit Größenangaben (Kompatibilität)
+\newcommand{\@parpic@with@size}[2][l]{%
+  \@ifnextchar({\@parpic@ignore@second[#1]{#2}}{\@parpic@use@size[#1]{#2}}%
+}
+
+\newcommand{\@parpic@ignore@second}[3][l]{%
+  \@ifnextchar[{\@parpic@with@all[#1]{#2}{#3}}{\@parpic@basic[#1]{ignore}{}}%
+}
+
+\newcommand{\@parpic@with@all}[5][l]{%
+  \@parpic@create[#1]{#2}{#4}{#5}%
+}
+
+\newcommand{\@parpic@use@size}[3][l]{%
+  \@ifnextchar[{\@parpic@size@opts[#1]{#2}{#3}}{\@parpic@basic[#1]{ignore}{}}%
+}
+
+\newcommand{\@parpic@size@opts}[5][l]{%
+  \@parpic@create[#1]{#2}{#4}{#5}%
+}
+
+% Hauptbefehl für Bild-Erstellung
+\newcommand{\@parpic@create}[4][l]{%
+  % #1 = Position (l/r), #2 = Größe (ignoriert), #3 = Optionen, #4 = Inhalt
+  \ifthenelse{\equal{#1}{r}}{\def\@pic@pos{R}}{\def\@pic@pos{L}}%
+  
+  % Parse Optionen für Rahmen/Schatten
+  \@pic@parse@options{#3}%
+  
+  % Erstelle das Bild mit modernen Methoden
+  \@pic@apply@effects{#4}%
+  
+  \begin{wrapfigure}{\@pic@pos}{0pt}
+    \@pic@final@content
+  \end{wrapfigure}%
+}
+
+% Basis-Version ohne Optionen
+\newcommand{\@parpic@basic}[3][l]{%
+  \@parpic@create[#1]{}{}{#3}%
+}
+
+% --- Optionen-Parser ---
+\newif\if@pic@frame
+\newif\if@pic@shadow
+\newif\if@pic@oval
+\newif\if@pic@dash
+\newif\if@pic@box
+
+\newcommand{\@pic@parse@options}[1]{%
+  % Reset flags
+  \@pic@framefalse
+  \@pic@shadowfalse
+  \@pic@ovalfalse
+  \@pic@dashfalse
+  \@pic@boxfalse
+  
+  % Parse einzelne Zeichen
+  \@tfor\@tempa:=#1\do{%
+    \ifx\@tempa f\@pic@frametrue\fi
+    \ifx\@tempa s\@pic@shadowtrue\fi
+    \ifx\@tempa o\@pic@ovaltrue\fi
+    \ifx\@tempa d\@pic@dashtrue\fi
+    \ifx\@tempa x\@pic@boxtrue\fi
+  }%
+}
+
+% --- Effekte anwenden ---
+\newcommand{\@pic@apply@effects}[1]{%
+  \def\@pic@content{#1}%
+  
+  \if@pic@frame
+    \@pic@add@frame
+  \else\if@pic@shadow
+    \@pic@add@shadow
+  \else\if@pic@oval
+    \@pic@add@oval
+  \else\if@pic@dash
+    \@pic@add@dash
+  \else\if@pic@box
+    \@pic@add@box
+  \else
+    \def\@pic@final@content{\@pic@content}%
+  \fi\fi\fi\fi\fi
+}
+
+% --- Moderne Rahmen-Implementierungen ---
+\newcommand{\@pic@add@frame}{%
+  \def\@pic@final@content{%
+    \fbox{\@pic@content}%
+  }%
+}
+
+\newcommand{\@pic@add@shadow}{%
+  \def\@pic@final@content{%
+    \begin{tcolorbox}[
+      enhanced,
+      drop shadow,
+      colback=white,
+      colframe=black,
+      boxrule=0.5pt,
+      sharp corners
+    ]
+      \@pic@content
+    \end{tcolorbox}%
+  }%
+}
+
+\newcommand{\@pic@add@oval}{%
+  \def\@pic@final@content{%
+    \begin{tcolorbox}[
+      enhanced,
+      colback=white,
+      colframe=black,
+      boxrule=0.5pt,
+      rounded corners=5pt
+    ]
+      \@pic@content
+    \end{tcolorbox}%
+  }%
+}
+
+\newcommand{\@pic@add@dash}{%
+  \def\@pic@final@content{%
+    \begin{tcolorbox}[
+      enhanced,
+      colback=white,
+      colframe=black,
+      boxrule=0.5pt,
+      sharp corners,
+      dashed
+    ]
+      \@pic@content
+    \end{tcolorbox}%
+  }%
+}
+
+\newcommand{\@pic@add@box}{%
+  \def\@pic@final@content{%
+    \begin{tcolorbox}[
+      enhanced,
+      colback=gray!10,
+      colframe=black,
+      boxrule=1pt,
+      sharp corners
+    ]
+      \@pic@content
+    \end{tcolorbox}%
+  }%
+}
+
+% --- \hpic Ersatz (horizontale Bilder) ---
+\newcommand{\hpic}[1][c]{%
+  \@ifnextchar({\@hpic@with@size[#1]}{\@hpic@simple[#1]}%
+}
+
+\newcommand{\@hpic@simple}[2][c]{%
+  \@ifnextchar[{\@hpic@with@options[#1]{#2}}{\@hpic@basic[#1]{#2}{}}%
+}
+
+\newcommand{\@hpic@with@options}[4][c]{%
+  \@hpic@create[#1]{#2}{#3}{#4}%
+}
+
+\newcommand{\@hpic@with@size}[2][c]{%
+  \@ifnextchar({\@hpic@ignore@second[#1]{#2}}{\@hpic@use@size[#1]{#2}}%
+}
+
+\newcommand{\@hpic@ignore@second}[3][c]{%
+  \@ifnextchar[{\@hpic@with@all[#1]{#2}{#3}}{\@hpic@basic[#1]{ignore}{}}%
+}
+
+\newcommand{\@hpic@with@all}[5][c]{%
+  \@hpic@create[#1]{#2}{#4}{#5}%
+}
+
+\newcommand{\@hpic@use@size}[3][c]{%
+  \@ifnextchar[{\@hpic@size@opts[#1]{#2}{#3}}{\@hpic@basic[#1]{ignore}{}}%
+}
+
+\newcommand{\@hpic@size@opts}[5][c]{%
+  \@hpic@create[#1]{#2}{#4}{#5}%
+}
+
+\newcommand{\@hpic@create}[4][c]{%
+  % Einfache horizontale Darstellung
+  \@pic@parse@options{#3}%
+  \@pic@apply@effects{#4}%
+  
+  \ifthenelse{\equal{#1}{t}}{\def\@pos{t}}{\ifthenelse{\equal{#1}{b}}{\def\@pos{b}}{\def\@pos{c}}}%
+  
+  \adjustbox{valign=\@pos}{\@pic@final@content}%
+}
+
+\newcommand{\@hpic@basic}[3][c]{%
+  \@hpic@create[#1]{}{}{#3}%
+}
+
+% --- Umgebungen (vereinfacht) ---
+\newenvironment{frameenv}[1][\textwidth]{%
+  \begin{tcolorbox}[
+    width=#1,
+    colback=white,
+    colframe=black,
+    boxrule=0.5pt,
+    sharp corners
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{shadowenv}[1][\textwidth]{%
+  \begin{tcolorbox}[
+    enhanced,
+    width=#1,
+    drop shadow,
+    colback=white,
+    colframe=black,
+    boxrule=0.5pt,
+    sharp corners
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{dashenv}[1][\textwidth]{%
+  \begin{tcolorbox}[
+    width=#1,
+    colback=white,
+    colframe=black,
+    boxrule=0.5pt,
+    sharp corners,
+    dashed
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+\newenvironment{ovalenv}[1][\textwidth]{%
+  \begin{tcolorbox}[
+    width=#1,
+    colback=white,
+    colframe=black,
+    boxrule=0.5pt,
+    rounded corners=5pt
+  ]
+}{%
+  \end{tcolorbox}
+}
+
+% --- Dummy-Befehle für Kompatibilität ---
+\newcommand{\picskip}[1]{\vspace{#1\baselineskip}}
+
+% Legacy-Rahmen-Befehle (falls noch verwendet)
+\newcommand{\Rahmen}[3]{\fbox{#3}}
+\newcommand{\Schatten}[3]{\@pic@add@shadow #3}
+\newcommand{\Oval}[3]{\@pic@add@oval #3}
+\newcommand{\Strich}[3]{\@pic@add@dash #3}
+\newcommand{\Kasten}[3]{\@pic@add@box #3}
+
+% --- Information ---
+\AtBeginDocument{%
+  \typeout{=== PICINS modernisiert ===}
+  \typeout{Original picins.sty (1992) ersetzt}
+  \typeout{Verwendet: wrapfig + tcolorbox + adjustbox}
+  \typeout{Kompatibilität: Grundlegende Befehle verfügbar}
+  \typeout{Warnung: Komplexe picins-Features nicht verfügbar}
+  \typeout{==============================}
+}
+
+\endinput

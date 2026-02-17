@@ -1,0 +1,75 @@
+% !TEX root = ../../1Main.tex
+% Aufgabenstellung - Template
+
+% ===================================================================
+% ANLEITUNG: Dieses Dokument ist die offizielle Aufgabenstellung
+% Ihrer Arbeit. Normalerweise wird dies von Ihrem Betreuer erstellt.
+% Aktivieren Sie dies in 1Main.tex nur wenn Sie eine formale
+% Aufgabenstellung haben!
+% ===================================================================
+
+% === Sauberer Seitenumbruch ===
+\clearpage
+\cleardoublepage
+
+% === Spezielle Formatierung für Aufgabenstellung ===
+\begingroup
+\let\cleardoublepage\relax
+\let\clearpage\relax
+
+% === Institution Logo ===
+\begin{figure}[t]
+  \vspace{1.5cm}
+  \begin{flushright}
+    \IfFileExists{default_style/AtheneGespiegelt.png}{%
+      \includegraphics[width=0.1\textwidth]{default_style/AtheneGespiegelt.png}%
+    }{%
+      \textcolor{secondary}{\rule{0.1\textwidth}{0.1\textwidth}}%
+    }
+  \end{flushright}
+  \vspace{-4.5cm}
+\end{figure}
+
+% === Aufgabenstellung ===
+\chapter*{Aufgabenstellung}
+
+\section*{Hintergrund}
+\textit{[Beschreiben Sie hier den fachlichen und wissenschaftlichen Hintergrund Ihrer Arbeit. Warum ist das Thema relevant? Welche Probleme sollen gelöst werden?]}
+
+\textit{[Kontext und Motivation der Arbeit...]}
+
+\newpage
+
+\section*{Aufgaben}
+
+\begin{enumerate}
+    \item \textbf{Motivation und Problemstellung:}\\
+      \textit{[Beschreibung der Motivation, konkrete Problemstellung, wissenschaftliche Fragestellungen, Begriffsdefinitionen]}
+    
+    \item \textbf{Grundlagenanalyse und Literaturrecherche:}\\
+      \textit{[Umfang der Literaturrecherche, zu analysierende Quellen, theoretische Einordnung]}
+
+    \item \textbf{Konzeption und Methodik:}\\
+      \textit{[Methodischer Ansatz, Architektur, Designentscheidungen]}
+
+    \item \textbf{Implementierung/Durchführung:}\\
+      \textit{[Konkrete Umsetzungsaufgaben, technische Anforderungen, zu entwickelnde Komponenten]}
+
+    \item \textbf{Evaluation:}\\
+      \textit{[Bewertungskriterien, Tests, Validierung der Ergebnisse]}
+
+    \item \textbf{Zusammenfassung und Ausblick:}\\
+      \textit{[Zusammenfassung der Erkenntnisse, kritische Reflexion, zukünftige Arbeiten]}
+  \end{enumerate}
+
+\endgroup
+
+% === Seitenfüllung und Abschluss ===
+\vspace*{\fill}
+\clearpage
+\thispagestyle{empty}
+
+% ===================================================================
+% HINWEIS: Dieses Dokument ist optional! Löschen Sie es wenn Sie
+% keine formale Aufgabenstellung benötigen.
+% ===================================================================

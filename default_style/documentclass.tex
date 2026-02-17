@@ -1,0 +1,85 @@
+% Moderne Dokumentklassen-Definition für LuaLaTeX
+% KOMA-Script Report optimiert für LuaLaTeX
+
+\documentclass[
+  12pt,                      % Größere Schrift (besser lesbar, DIN 5008)
+  a4paper,                   % Papierformat A4
+  twoside,                   % Doppelseitiger Druck
+  openright,                 % Neue Kapitel auf rechter Seite
+  bibliography=totoc,        % Literaturverzeichnis im Inhaltsverzeichnis
+  listof=totoc,              % Verzeichnisse im Inhaltsverzeichnis
+  index=totoc,               % Index im Inhaltsverzeichnis (falls verwendet)
+  tablecaptionabove,         % Tabellenüberschrift oben
+  headinclude,               % Kopfzeile im Satzspiegel
+  footinclude=false,         % Fußzeile außerhalb (Standard)
+  numbers=noenddot,          % Keine Punkte nach Nummern (modern)
+  captions=tableheading,     % Optimiert für Tabellen-Captions
+  titlepage=true,            % Separate Titelseite
+  abstract=true,             % Abstract-Umgebung verfügbar
+  version=last,              % Neueste KOMA-Version (MUSS hier stehen!)
+  final                      % final Final-Version (keine Draft-Markierungen)
+]{scrreprt}
+
+% --- KOMA-Script Optionen (ohne version) ---
+\KOMAoptions{
+  parskip=half,              % Halber Absatzabstand
+  chapterprefix=true,        % "Kapitel X" als Präfix
+  headsepline=true,          % Linie unter Kopfzeile
+  footsepline=false,         % Keine Linie über Fußzeile
+  % Moderne Typografie-Optionen
+  DIV=12,                    % Satzspiegel-Berechnung (guter Kompromiss)
+  BCOR=0mm,                  % Bindekorrektur (anpassen falls Bindung)
+  % Überschriften-Stil
+  headings=normal,           % Standard-Überschriften
+  % Fußnoten
+  footnotes=multiple         % Mehrere Fußnoten pro Seite möglich
+}
+
+% --- Schriftgrößen für verschiedene Elemente ---
+\addtokomafont{disposition}{\rmfamily\bfseries}  % Überschriften serifenlos + fett
+\addtokomafont{chapter}{\large}                  % Kapitel etwas größer
+\addtokomafont{section}{\normalsize}             % Abschnitte normal
+\addtokomafont{subsection}{\small}               % Unterabschnitte kleiner
+\addtokomafont{caption}{\small\itshape}          % Bildunterschriften klein + kursiv
+\addtokomafont{captionlabel}{\bfseries}          % "Abbildung X:" fett
+
+% --- Seitenränder (moderne Werte) ---
+% Alternative zu DIV-Berechnung - falls manuelle Kontrolle gewünscht
+% \usepackage[
+%   top=2.5cm,
+%   bottom=2.5cm,
+%   left=3cm,
+%   right=2.5cm,
+%   headheight=1.2cm,
+%   headsep=0.5cm,
+%   footskip=1cm
+% ]{geometry}
+
+% --- Kapitel-Stil anpassen (optional) ---
+\renewcommand*{\chapterformat}{%
+  \chapappifchapterprefix{\nobreakspace}\thechapter\autodot\enskip
+}
+
+% --- Moderne Nummerierungstiefe ---
+\setcounter{secnumdepth}{3}    % Nummerierung bis Unterabschnitt
+\setcounter{tocdepth}{3}       % Inhaltsverzeichnis bis Unterabschnitt
+
+% --- PDF-Kompatibilität ---
+% Automatische Erkennung der LaTeX-Engine
+\usepackage{iftex}
+\ifLuaTeX
+  % LuaTeX-spezifische Einstellungen
+  \RequirePackage{luatex85}    % Rückwärts-Kompatibilität
+\else
+  \PackageError{documentclass}{Diese Vorlage ist für LuaLaTeX optimiert!}{%
+    Bitte verwenden Sie LuaLaTeX als Compiler.
+  }
+\fi
+
+% --- Debug-Information ---
+\typeout{=== Dokumentklasse geladen ===}
+\typeout{Engine: LuaTeX}
+\typeout{Klasse: scrreprt (KOMA-Script)}
+\typeout{Schriftgröße: 12pt}
+\typeout{Papier: A4, zweiseitig}
+\typeout{==============================}
