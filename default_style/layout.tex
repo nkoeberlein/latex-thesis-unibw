@@ -1,0 +1,143 @@
+% =============================================================
+% layout.tex - Seitenränder, Abstände, Kopf-/Fußzeilen, Verzeichnisse
+% Ersetzt: Seitenrand-settings.tex + Absatz_Abstand-settings.tex +
+%          Kopf_und_Fusszeile_misc.tex + Tocstyle.tex +
+%          Abkuerzungsverzeichnis-settings.tex
+% =============================================================
+
+% =============================================================
+% 1. SEITENRÄNDER
+% =============================================================
+
+\usepackage{geometry}
+
+\newif\ifdigitalversion
+\digitalversiontrue  % Für PDF/Digital (auf false setzen für Druck)
+
+\ifdigitalversion
+  \geometry{
+    a4paper, twoside,
+    left=30mm, right=30mm,
+    top=25mm, bottom=30mm,
+    headheight=15pt, headsep=10mm, footskip=12mm
+  }
+\else
+  \geometry{
+    a4paper, twoside,
+    left=35mm, right=25mm,
+    top=25mm, bottom=30mm,
+    headheight=15pt, headsep=10mm, footskip=12mm,
+    bindingoffset=5mm
+  }
+\fi
+
+\raggedbottom
+
+% =============================================================
+% 2. ABSATZABSTÄNDE & LISTEN
+% =============================================================
+
+\setlength{\emergencystretch}{3em}
+
+% Listen-Konfiguration
+\setlist{parsep=0pt, itemsep=3pt, topsep=6pt, partopsep=0pt}
+\setlist[itemize]{label=\textcolor{primary}{\textbullet}, leftmargin=1.5em}
+\setlist[enumerate]{label=\textcolor{secondary}{\arabic*.}, leftmargin=2em}
+\setlist[description]{font=\bfseries\color{headingcolor}, leftmargin=2em}
+
+% Utility-Befehle für Absatzabstände
+\newcommand{\tightpars}{\setlength{\parskip}{3pt plus 1pt minus 1pt}}
+\newcommand{\loosepars}{\setlength{\parskip}{9pt plus 3pt minus 2pt}}
+\newcommand{\resetpars}{\KOMAoptions{parskip=half}}
+
+% =============================================================
+% 3. KOPF- UND FUSSZEILEN
+% =============================================================
+
+\usepackage[automark, headsepline]{scrlayer-scrpage}
+\pagestyle{scrheadings}
+\clearscrheadings
+\clearscrplain
+
+% Gerade Seiten (links)
+\lehead{\rightmark}
+\rehead{}
+% Ungerade Seiten (rechts)
+\lohead{}
+\rohead{\leftmark}
+% Seitenzahlen außen
+\lefoot{\pagemark}
+\refoot{}
+\lofoot{}
+\rofoot{\pagemark}
+% Plain-Stil (Kapitelanfänge)
+\lefoot[\pagemark]{\pagemark}
+\rofoot[\pagemark]{\pagemark}
+
+\automark[section]{chapter}
+
+% =============================================================
+% 4. INHALTSVERZEICHNIS (TOC)
+% =============================================================
+
+% Schriftarten für TOC-Elemente
+\addtokomafont{disposition}{\bfseries}
+\addtokomafont{chapter}{\LARGE\bfseries\color{headingcolor}}
+\addtokomafont{section}{\Large\bfseries\color{headingcolor}}
+\addtokomafont{subsection}{\large\bfseries\color{headingcolor}}
+\addtokomafont{subsubsection}{\normalsize\bfseries\color{headingcolor}}
+\addtokomafont{paragraph}{\normalsize\bfseries\color{headingcolor}}
+
+% Titelseite
+\addtokomafont{title}{\huge\bfseries\color{headingcolor}}
+\addtokomafont{author}{\Large\color{secondary}}
+\addtokomafont{date}{\large\color{secondary}}
+
+% Kopf/Fuß, Beschriftungen
+\addtokomafont{pageheadfoot}{\small\color{secondary}}
+\addtokomafont{pagenumber}{\small\bfseries}
+\addtokomafont{caption}{\small\color{secondary}}
+\addtokomafont{captionlabel}{\small\bfseries\color{headingcolor}}
+\addtokomafont{footnote}{\footnotesize}
+\addtokomafont{chapterentry}{\bfseries\color{headingcolor}}
+
+% TOC-Konfiguration
+\KOMAoptions{toc=chapterentrywithdots}
+
+% Deutsche Bezeichnungen
+\renewcommand{\contentsname}{Inhaltsverzeichnis}
+\renewcommand{\listfigurename}{Abbildungsverzeichnis}
+\renewcommand{\listtablename}{Tabellenverzeichnis}
+\renewcommand{\figurename}{Abbildung}
+\renewcommand{\tablename}{Tabelle}
+\renewcommand{\chaptername}{Kapitel}
+\renewcommand{\appendixname}{Anhang}
+
+% =============================================================
+% 5. ABKÜRZUNGSVERZEICHNIS (GLOSSARIES)
+% =============================================================
+
+% Deutsche Bezeichnungen
+\renewcommand{\glossaryname}{Glossar}
+\renewcommand{\acronymname}{Abkürzungsverzeichnis}
+
+% Stil
+\setglossarystyle{long3col}
+\setacronymstyle{long-short}
+\renewcommand*{\glstextformat}[1]{\textcolor{primary}{#1}}
+\setlength{\glsdescwidth}{0.6\textwidth}
+\setlength{\glspagelistwidth}{0.1\textwidth}
+
+% Glossar-Befehle
+\renewcommand*{\glsnamefont}[1]{\textbf{\textcolor{headingcolor}{#1}}}
+\setglossarysection{section}
+
+% Hilfs-Befehle
+\newcommand{\abk}[2]{\newacronym{#1}{#1}{#2}}
+\newcommand{\begriff}[3][]{\newglossaryentry{#2}{name={#2}, description={#3}, #1}}
+
+% Zusätzliche Glossar-Arten
+\newglossary[slg]{symbols}{syi}{syg}{Symbolverzeichnis}
+
+% Glossar aktivieren
+\makeglossaries

@@ -22,6 +22,8 @@ Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universi
 
 ## 📋 Voraussetzungen
 
+> **📖 Ausführliche Installationsanleitung:** Siehe [docus/LaTeX-Installation.md](docus/LaTeX-Installation.md) für eine Schritt-für-Schritt-Anleitung zur Installation von TeX Live, VS Code und Antigravity.
+
 ### Erforderliche Software
 
 1. **LuaLaTeX** (TeX Live 2023 oder neuer empfohlen)

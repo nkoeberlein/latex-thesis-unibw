@@ -1,0 +1,233 @@
+% =============================================================
+% setup.tex - Dokumentklasse, Pakete & Schriftarten
+% Ersetzt: documentclass.tex + load_packages.tex + Schriftart-settings.tex
+% =============================================================
+
+% --- Warnungen unterdrücken ---
+\RequirePackage{silence}
+\WarningFilter*{titlesec}{Non standard sectioning command detected}
+\WarningFilter*{titlesec}{Usage of package `titlesec'}
+\WarningFilter*{titlesec}{Activating an ugly workaround}
+
+% =============================================================
+% 1. DOKUMENTKLASSE
+% =============================================================
+
+\documentclass[
+  12pt,
+  a4paper,
+  twoside,
+  openright,
+  bibliography=totoc,
+  listof=totoc,
+  captions=tableheading,
+  headinclude,
+  numbers=noenddot,
+  titlepage=true,
+  abstract=true,
+  version=last,
+  final
+]{scrreprt}
+
+\KOMAoptions{
+  parskip=half,
+  chapterprefix=true,
+  headsepline=true,
+  footsepline=false,
+  DIV=12,
+  BCOR=0mm,
+  headings=normal,
+  footnotes=multiple
+}
+
+% Überschriften-Stile
+\addtokomafont{disposition}{\rmfamily\bfseries}
+\addtokomafont{chapter}{\large}
+\addtokomafont{section}{\normalsize}
+\addtokomafont{subsection}{\small}
+\addtokomafont{caption}{\small\itshape}
+\addtokomafont{captionlabel}{\bfseries}
+
+% Nummerierungstiefe
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% Kapitel-Format
+\renewcommand*{\chapterformat}{%
+  \chapappifchapterprefix{\nobreakspace}\thechapter\autodot\enskip
+}
+
+% LuaTeX-Prüfung
+\usepackage{iftex}
+\ifLuaTeX
+  \RequirePackage{luatex85}
+\else
+  \PackageError{setup}{Diese Vorlage erfordert LuaLaTeX!}{}
+\fi
+
+% =============================================================
+% 2. SCHRIFTARTEN
+% =============================================================
+
+\usepackage{fontspec}
+
+% Hauptschrift
+\IfFontExistsTF{Arial}{
+  \setmainfont{Bookerly}[
+    Path = fonts/,
+    Extension = .ttf,
+    UprightFont = Bookerly-Regular,
+    BoldFont = Bookerly-Bold,
+    ItalicFont = Bookerly-RegularItalic,
+    BoldItalicFont = Bookerly-BoldItalic
+  ]
+}{
+  \setmainfont{TeX Gyre Heros}[
+    Scale=1.0,
+    Ligatures=TeX,
+    UprightFont=*-Regular,
+    BoldFont=*-Bold,
+    ItalicFont=*-Italic,
+    BoldItalicFont=*-BoldItalic,
+  ]
+}
+
+% Monospace-Schrift für Code
+\IfFontExistsTF{Consolas}{
+  \setmonofont{Consolas}[Scale=0.9]
+}{
+  \IfFontExistsTF{DejaVu Sans Mono}{
+    \setmonofont{DejaVu Sans Mono}[Scale=0.9]
+  }{
+    \setmonofont{TeX Gyre Cursor}[Scale=0.9]
+  }
+}
+
+% Typografie
+\usepackage{microtype}
+\microtypesetup{protrusion=true, expansion=true}
+
+% Trennverhalten
+\tolerance=2000
+\emergencystretch=1em
+\hyphenpenalty=5000
+\clubpenalty=10000
+\widowpenalty=10000
+
+% =============================================================
+% 3. PAKETE
+% =============================================================
+
+% Sprache
+\usepackage{polyglossia}
+\setmainlanguage[spelling=new]{german}
+\setotherlanguage{english}
+
+% Kommentare
+\usepackage{comment}
+
+% Mathematik
+\usepackage{amsmath, amssymb, amsfonts, amsthm, amsbsy}
+\usepackage{mathtools}
+\usepackage{unicode-math}
+
+% Tabellen
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array, longtable}
+\usepackage{tabularray}
+\usepackage{lscape}
+\usepackage{pdflscape}
+
+% Grafiken
+\usepackage{graphicx}
+\usepackage{qrcode}
+\graphicspath{{media/}}
+\usepackage{float}
+\usepackage{placeins}
+\usepackage{rotating}
+\usepackage{subcaption}
+\usepackage{wrapfig}
+\usepackage{adjustbox}
+
+% Symbole & TikZ
+\usepackage{fontawesome5}
+\usepackage{tikz}
+\usetikzlibrary{positioning, shapes.geometric, arrows.meta}
+
+% Text & Layout
+\usepackage{ragged2e}
+\usepackage{setspace}
+\setstretch{1.1}
+\usepackage{enumitem}
+\usepackage{nowidow}
+
+% Bibliographie
+\usepackage[
+  backend=biber,
+  style=numeric,
+  sorting=none,
+  sortcites=true,
+  giveninits=true,
+  maxbibnames=99
+]{biblatex}
+
+% Glossar
+\usepackage[acronym,toc,nogroupskip]{glossaries}
+
+% PDF & externe Inhalte
+\usepackage{pdfpages}
+\usepackage{todonotes}
+
+% URLs & Links
+\usepackage{url}
+\usepackage{xurl}
+
+% Beschriftungen
+\usepackage[
+  format=plain,
+  labelfont=bf,
+  justification=centering,
+  tableposition=top,
+  figureposition=bottom,
+  font=small
+]{caption}
+
+% Farben
+\usepackage{xcolor}
+
+% Quotes & Platzhalter
+\usepackage{csquotes}
+\MakeOuterQuote{"}
+\usepackage{lipsum}
+
+% Theorem-Definitionen
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{beispiel}[definition]{Beispiel}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{satz}[definition]{Satz}
+
+% Utility-Befehle
+\usepackage{xspace}
+\newcommand{\zB}{z.\,B.\xspace}
+\newcommand{\dhh}{d.\,h.\xspace}
+\newcommand{\ua}{u.\,a.\xspace}
+
+% Hilfsbefehle
+\newcommand{\tick}{\textcolor{green!60!black}{✓}}
+\newcommand{\cross}{\textcolor{red!60!black}{✗}}
+
+% Rotierte Seite
+\newenvironment{rotatepage}{%
+  \clearpage\begin{landscape}
+}{%
+  \end{landscape}\clearpage
+}
+
+% LuaTeX-spezifische Pakete
+\usepackage{luatex85}
+\ifLuaTeX
+  \usepackage{luacode}
+  \usepackage{shellesc}
+\fi

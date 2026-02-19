@@ -79,8 +79,9 @@ build/
 *.backup
 
 # === Editor-spezifische Dateien ===
-# VSCode
-.vscode/
+# VSCode – settings.json tracken (lualatex-Konfiguration), aber persönliche Dateien nicht
+.vscode/*
+!.vscode/settings.json
 *.code-workspace
 
 # TeXstudio
@@ -125,8 +126,6 @@ Desktop.ini
 !*.sty
 # README bleibt
 !README.md
-!readme.tex
-!readme.pdf
 
 # === Ausnahmen für wichtige PDFs ===
 # Das fertige PDF sollten Sie bei Bedarf committen

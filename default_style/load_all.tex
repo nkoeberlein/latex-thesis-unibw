@@ -1,43 +1,18 @@
 % !TEX program = lualatex
+% =============================================================
+% load_all.tex - Lädt alle Konfigurationen
+% Nur 3 Dateien statt 12+:
+%   setup.tex   → Dokumentklasse, Pakete, Schriftarten
+%   layout.tex  → Seitenränder, Abstände, Kopf-/Fußzeilen, TOC
+%   style.tex   → Farben, Fußnoten, Code, Emojis, Hyperref
+% =============================================================
 
-% --- Log-Warnungen unterdrücken ---
-\RequirePackage{silence}
-\WarningFilter*{titlesec}{Non standard sectioning command detected}
-\WarningFilter*{titlesec}{Usage of package `titlesec' together(scrreprt) with a KOMA-Script class is not recommended.}
-\WarningFilter*{titlesec}{Activating an ugly workaround for a missing}
-
-% --- Dokumentklasse und Pakete ---
-\input{default_style/documentclass}
-\input{default_style/Schriftart-settings}
-\input{default_style/load_packages}
-
-% --- Layout & Seitenränder ---
-\input{default_style/Seitenrand-settings}
-\input{default_style/Absatz_Abstand-settings}
-\input{default_style/Kopf_und_Fusszeile_misc}
-
-% --- Inhaltsverzeichnis & Verzeichnisse ---
-\input{default_style/TocStyle}
-\input{default_style/Abkuerzungsverzeichnis-settings}
-
-% --- Farben & Gestaltung ---
-\input{default_style/Farben_definieren-settings}
-\input{default_style/Fussnoten-settings}
-\input{default_style/Listings-settings}
-\input{default_style/ASCII-Art-settings}
-
-% --- Emoji-System ---
-\input{default_style/Emoji-settings}
-
-% --- Hyperref-Konfiguration ---
-\input{default_style/Hyperref-settings} % Hyperref muss stets zuletzt geladen werden
+\input{default_style/setup}
+\input{default_style/layout}
+\input{default_style/style}
 
 % --- Eigene Befehle & Metadaten ---
 \renewcommand{\proofname}{Beweis}
 
-% --- Font-Einstellungen (modernisiert für LuaLaTeX) ---
-% Achtung: Wird in Schriftart-settings definiert, nicht hier überschreiben
-
-% --- Titeldaten ---
-\author{Nikolaus Köberlein}
-\title{E-Estonia als Blaupause für die Digitalisierung der deutschen Verwaltung}
+% --- Persönliche Angaben (Autor, Titel, Betreuer etc.) ---
+\input{metadata}

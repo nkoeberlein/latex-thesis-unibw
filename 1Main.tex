@@ -51,11 +51,12 @@
 
 % Titelseite (UniBw München Layout)
 \input{default_frame/Titelseite}
+\input{default_frame/DeckblattRegensburg}
 
 % Optional: Weitere Frontmatter-Inhalte
-%\input{content/allgemein/Aufgabenstellung}         % Nur bei Bachelor-/Masterarbeiten
+\input{content/allgemein/Aufgabenstellung}         % Nur bei Bachelor-/Masterarbeiten
 \input{content/allgemein/Abstract}                   % Abstract (empfohlen)
-%\input{content/allgemein/Danksagung}                % Optional
+\input{content/allgemein/Danksagung}                % Optional
 
 % === Verzeichnisse ===
 \input{default_frame/Inhaltsverzeichnis}             % Inhaltsverzeichnis (erforderlich)
@@ -111,29 +112,3 @@
 \input{default_frame/SelbststaendigkeitserklaerungUniBwM}
 
 \end{document}
-
-% ===================================================================
-% HINWEISE ZUR ANPASSUNG:
-%
-% 1. Titelseite:
-%    - Öffnen Sie default_frame/Titelseite.tex
-%    - Passen Sie Titel, Studiengang, Betreuer, Datum an
-%
-% 2. Kapitel hinzufügen/entfernen:
-%    - Erstellen Sie neue .tex-Dateien in content/
-%    - Binden Sie diese mit \input{content/NeuesKapitel} ein
-%
-% 3. Bibliographie:
-%    - Fügen Sie Quellen in bibliography/references.bib hinzu
-%    - Zitieren Sie mit \cite{key}
-%
-% 4. Glossar:
-%    - Definieren Sie Begriffe in content/allgemein/Glossar.tex
-%    - Verwenden Sie \gls{begriff} im Text
-%
-% 5. Code-Highlighting:
-%    - Nutzen Sie minted für Code-Listings
-%    - Unterstützt 300+ Sprachen
-%    - Siehe content/Code.tex für Beispiele
-%
-% ===================================================================
