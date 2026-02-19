@@ -242,14 +242,20 @@
   pdfpagelayout=OneColumn,
   pdfpagemode=UseOutlines,
   hidelinks=false,
-  % PDF-Metadaten – werden automatisch aus metadata.tex befüllt
   pdflang={de-DE},
-  pdfauthor={\myname},
-  pdftitle={\mytitle},
-  pdfsubject={\mytype},
   pdfcreator={LuaLaTeX},
   pdfproducer={LaTeX with hyperref and LuaTeX}
 }
+
+% PDF-Metadaten aus metadata.tex – erst nach \input{metadata} auswerten
+\AtBeginDocument{%
+  \hypersetup{%
+    pdfauthor={\myname},%
+    pdftitle={\mytitle},%
+    pdfsubject={\mytype}%
+  }%
+}
+
 
 \def\UrlBreaks{%
     \do\-\do\_\do\/\do\*\do\~\do\'\do\"
