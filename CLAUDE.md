@@ -32,7 +32,8 @@ latexmk 1Main.tex    # .latexmkrc: lualatex --shell-escape + biber + makeglossar
 ## Gotchas
 
 - Nur LuaLaTeX (fontspec, unicode-math); `--shell-escape` ist Pflicht für minted.
-- Lokal ist **kein TeX installiert** und soll auch nicht installiert werden – Änderungen über CI prüfen.
+- Lokal ist **kein TeX installiert** und soll auch nicht installiert werden – Änderungen über CI prüfen
+  (`.github/workflows/build.yml`, PDFs als Artefakt `pdf`).
 - Schalter müssen **vor** `\input{default_style/load_all}` stehen; `setup.tex` legt Standardwerte an,
   falls ein Dokument (z. B. `Skript.tex`) sie nicht definiert.
 - `\makeglossaries` steht nur in `1Main.tex`, nach allen `\newglossary` in `layout.tex`.
