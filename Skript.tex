@@ -1,0 +1,88 @@
+% !TEX root = ./Skript.tex
+% !TEX program = lualatex
+% ===================================================================
+% Skript / Exposé für die Einreichung von Ideenvorschlägen
+% Optimiert für LuaLaTeX
+% ===================================================================
+
+\input{default_style/load_all}
+
+% --- Bibliographie-Ressource ---
+\addbibresource{bibliography/references.bib}
+
+% ===================================================================
+% === DOKUMENT BEGINNT HIER ===
+% ===================================================================
+
+\begin{document}
+
+% --- Kopfzeile für das Skript / Exposé ---
+\begin{center}
+    \vspace*{0.5cm}
+    \Large{\textbf{Ideenskizze / Exposé für eine wissenschaftliche Arbeit}}\\[0.8cm]
+    
+    \LARGE{\textbf{\mytitle}}\\[1cm]
+    
+    \normalsize
+    \begin{tabular}{ll}
+        \textbf{Eingereicht von:} & \myname{} (\matricle) \\
+        \textbf{Institution:} & \myuniversity, \myfaculty \\
+        \textbf{Angestrebte Arbeit:} & \mytype \\
+        \textbf{Gewünschte Betreuung:} & \reviewerone{} / \advisor \\
+        \textbf{Datum:} & \today \\
+    \end{tabular}
+\end{center}
+
+\vspace{1cm}
+
+% --- Inhalt des Exposés ---
+
+\section*{1. Motivation und Ausgangslage}
+Führen Sie in die Thematik ein und beschreiben Sie den Kontext Ihrer Arbeit.
+Warum ist das Thema aktuell und relevant? Welches Problem in der Wissenschaft oder Praxis soll adressiert werden? Skizzieren Sie kurz den „State of the Art“ bzw. bestehenden Forschungsstand anhand von 1-3 zentralen Literaturquellen. (ca. 1-2 Absätze)
+
+\section*{2. Zielsetzung und Forschungsfragen}
+Was ist das konkrete Ziel Ihrer geplanten Arbeit? Was soll am Ende herauskommen (z.\,B. ein Artefakt, eine empirische Studie, eine fundierte Literaturrecherche)?
+Brechen Sie das übergeordnete Ziel auf 2-3 präzise und überprüfbare Forschungsfragen (Research Questions - RQs) herunter:
+\begin{itemize}
+    \item \textbf{RQ 1:} Wie lässt sich ...?
+    \item \textbf{RQ 2:} Welchen Einfluss hat ... auf ...?
+    \item \textbf{RQ 3:} Inwiefern unterscheidet sich ...?
+\end{itemize}
+
+\section*{3. Methodisches Vorgehen}
+Wie planen Sie, die Forschungsfragen zu beantworten? Skizzieren Sie Ihr Untersuchungsdesign.
+Beispiele für Methoden:
+\begin{itemize}
+    \item \textbf{Literaturarbeit:} Systematische Literaturrecherche (z.\,B. nach Webster \& Watson).
+    \item \textbf{Empirie:} Qualitativ (Experteninterviews, Fallstudien) oder Quantitativ (Online-Umfragen, Experimente).
+    \item \textbf{Konstruktion / Design Science:} Entwicklung eines Prototyps, Modells oder Frameworks inklusive Evaluation.
+\end{itemize}
+Beschreiben Sie ebenfalls, welche Daten benötigt werden und wie Sie diese gewinnen möchten.
+
+\section*{4. Vorläufige Gliederung}
+Geben Sie eine erste, grobe Struktur der Arbeit an (bis zur zweiten Gliederungsebene, ca. 5-7 Hauptkapitel). Dies hilft, den Roten Faden der Arbeit abzuschätzen.
+\begin{enumerate}
+    \item Einleitung (Motivation, Forschungsfragen, Aufbau)
+    \item Theoretischer Hintergrund und verwandte Arbeiten
+    \item Methodik
+    \item Kernteil: z.\,B. Konzeption / Implementierung / Datenerhebung
+    \item Ergebnisse und Auswertung
+    \item Diskussion (Interpretation, Limitationen)
+    \item Fazit und Ausblick
+\end{enumerate}
+
+\section*{5. Zeitplan}
+Skizzieren Sie grob die Meilensteine bis zur geplanten Abgabe. Planen Sie Pufferzeiten (ca. 10-20\,\%) für unvorhergesehene Verzögerungen ein.
+\begin{itemize}
+    \item \textbf{Monat 1:} Literaturrecherche und Einarbeitung in das Thema
+    \item \textbf{Monat 2-3:} Datenerhebung / Implementierung des Artefakts
+    \item \textbf{Monat 4-5:} Evaluation, Auswertung und Niederschrift der Ergebnisse
+    \item \textbf{Monat 6:} Finalisierung, Formatierung und Korrekturlesen
+\end{itemize}
+
+\newpage
+% --- Literaturverzeichnis ---
+\printbibliography[title={Vorläufiges Literaturverzeichnis}]
+
+\end{document}
