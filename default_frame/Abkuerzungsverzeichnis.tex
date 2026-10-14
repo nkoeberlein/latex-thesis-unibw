@@ -11,18 +11,8 @@
 \let\cleardoublepage\relax
 \let\clearpage\relax
 
-% === Institution Logo ===
-\begin{figure}[t]
-  \vspace{1.5cm}
-  \begin{flushright}
-    \IfFileExists{default_style/AtheneGespiegelt.png}{%
-      \includegraphics[width=0.1\textwidth]{default_style/AtheneGespiegelt.png}%
-    }{%
-      \textcolor{secondary}{\rule{0.1\textwidth}{0.1\textwidth}}%
-    }
-  \end{flushright}
-  \vspace{-4.5cm}
-\end{figure}
+% === Institution Logo (Makro in default_style/layout.tex) ===
+\verzeichnislogo
 
 % === Kapitelüberschrift ohne Nummer ===
 \chapter*{Abkürzungsverzeichnis}
