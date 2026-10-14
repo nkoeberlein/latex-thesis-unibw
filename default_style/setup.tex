@@ -71,8 +71,8 @@
 
 \usepackage{fontspec}
 
-% Hauptschrift
-\IfFontExistsTF{Arial}{
+% Hauptschrift: Bookerly aus fonts/ (liegt im Repo, muss nicht installiert sein)
+\IfFileExists{fonts/Bookerly-Regular.ttf}{
   \setmainfont{Bookerly}[
     Path = fonts/,
     Extension = .ttf,
