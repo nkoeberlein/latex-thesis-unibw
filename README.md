@@ -8,7 +8,10 @@
 
 Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universität der Bundeswehr München, optimiert für **LuaLaTeX** (Stand: 2026).
 
-> **🚀 Neu hier?** → Siehe [START_HERE.md](START_HERE.md) für eine Schritt-für-Schritt-Anleitung!
+> **🚀 Neu hier?** → Direkt zum [Schnellstart](#-schnellstart).
+>
+> **Lieber Typst statt LaTeX?** Es gibt dieselbe Vorlage auch als Typst-Version mit gleichem Aufbau und gleichen Metadaten:
+> [typst-thesis-unibw](https://github.com/nkoeberlein/typst-thesis-unibw)
 
 ## ✨ Features
 
@@ -52,11 +55,16 @@ Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universi
 
 ### 1. Vorlage anpassen
 
-1. **Titelseite**: Öffnen Sie `default_frame/Titelseite.tex`
-   - Ersetzen Sie `[Titel Ihrer Arbeit]` mit Ihrem Titel
-   - Passen Sie Studiengang, Matrikelnummer und Betreuer an
+1. **Persönliche Angaben**: Öffnen Sie `metadata.tex` – das ist die einzige Datei, die Sie zu Beginn anpassen müssen.
+   Titelseite, Eidesstattliche Erklärung, Exposé und PDF-Metadaten lesen ihre Angaben von dort.
+   - Name, Matrikelnummer, Titel, Art der Arbeit
+   - Fakultät, Institut, Professur
+   - Gutachter/Betreuer – `\reviewertwo` und `\advisor` leer lassen (`{}`), um sie auf der Titelseite auszublenden
+   - Abgabedatum (`\timeend`) und Ort (`\myplace`)
 
 2. **Hauptdokument**: Öffnen Sie `1Main.tex`
+   - Schalter oben: `\isprinttrue` für die Druckfassung (doppelseitig, Kapitel rechts, Bindekorrektur),
+     `\isdrafttrue` für ein ENTWURF-Wasserzeichen
    - Aktivieren/deaktivieren Sie gewünschte Verzeichnisse
    - Fügen Sie Ihre Kapitel hinzu
 
@@ -66,7 +74,18 @@ Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universi
 
 ### 2. Kompilierung
 
-#### Manuell (Terminal/Kommandozeile)
+#### Mit latexmk (empfohlen)
+
+```bash
+latexmk 1Main.tex        # LuaLaTeX + Biber + makeglossaries, so oft wie nötig
+latexmk -pvc 1Main.tex   # Automatisch neu bauen bei jeder Änderung
+latexmk Skript.tex       # Exposé / Ideenskizze
+latexmk -c               # Hilfsdateien entfernen
+```
+
+Die Konfiguration steht in `.latexmkrc`.
+
+#### Manuell (ohne latexmk)
 
 ```bash
 # Vollständige Kompilierung mit allen Verzeichnissen
@@ -77,20 +96,13 @@ lualatex --shell-escape 1Main.tex
 lualatex --shell-escape 1Main.tex
 ```
 
-#### Mit Shell-Script (empfohlen)
+#### Mit Shell-Script
 
 ```bash
-# Normale Kompilierung (alle Verzeichnisse)
-./compile.sh
-
-# Schnelle Kompilierung (nur 1× LuaLaTeX für Vorschau)
-./compile.sh --fast
-
-# Mit Bereinigung zuerst
-./compile.sh --clean
-
-# Automatische Neu-Kompilierung bei Änderungen
-./compile.sh --watch
+./compile.sh            # Vollständig (nutzt latexmk, falls vorhanden)
+./compile.sh Skript     # Exposé bauen
+./compile.sh --fast     # Schnelle Vorschau (nur 1× LuaLaTeX)
+./compile.sh --clean    # Erst bereinigen, dann kompilieren
 ```
 
 #### Nur bereinigen
@@ -103,7 +115,10 @@ lualatex --shell-escape 1Main.tex
 
 ```
 wissenschaftlArbeit/
-├── 1Main.tex                    # Hauptdokument
+├── 1Main.tex                    # Hauptdokument (Schalter \ifisprint / \ifisdraft)
+├── metadata.tex                 # Persönliche Angaben – hier beginnen
+├── Skript.tex                   # Exposé / Ideenskizze
+├── .latexmkrc                   # latexmk-Konfiguration
 ├── README.md                    # Diese Datei
 ├── compile.sh                   # Kompilierungsskript
 ├── clean-latex.sh              # Aufräumskript
@@ -126,17 +141,18 @@ wissenschaftlArbeit/
 │   └── SelbststaendigkeitserklaerungUniBwM.tex
 │
 ├── default_style/             # Styling und Pakete
-│   ├── load_all.tex          # Lädt alle Konfigurationen
-│   ├── load_packages.tex     # Paket-Definitionen
-│   ├── Schriftart-settings.tex
-│   ├── Farben_definieren-settings.tex
-│   └── ...
+│   ├── load_all.tex          # Lädt alle Konfigurationen + metadata.tex
+│   ├── setup.tex             # Dokumentklasse, Pakete, Schriftarten
+│   ├── layout.tex            # Ränder, Kopf-/Fußzeilen, Überschriften, Glossar-Stil
+│   ├── style.tex             # Farben, Fußnoten, Code (minted), Hyperref
+│   ├── watermark.tex         # ENTWURF-Wasserzeichen
+│   └── Signet_UniBw.pdf, Athene*.png
 │
 ├── bibliography/
 │   └── references.bib        # Ihre Literaturquellen
 │
 ├── media/                    # Bilder und Grafiken
-└── fonts/                    # Schriftarten (falls benötigt)
+└── fonts/                    # Bookerly (wird direkt aus dem Ordner geladen)
 ```
 
 ## 📝 Verwendung
@@ -216,15 +232,15 @@ Mit booktabs (modern):
 
 ### Farben ändern
 
-Bearbeiten Sie `default_style/Farben_definieren-settings.tex`:
+Bearbeiten Sie `default_style/style.tex` (Abschnitt „Farben“):
 ```latex
-\definecolor{primary}{RGB}{0,82,147}     % UniBw Blau
-\definecolor{secondary}{RGB}{227,6,19}   % UniBw Rot
+\definecolor{primary}{RGB}{0, 102, 153}
+\definecolor{secondary}{RGB}{102, 102, 102}
 ```
 
 ### Schriftart ändern
 
-Bearbeiten Sie `default_style/Schriftart-settings.tex`:
+Bearbeiten Sie `default_style/setup.tex` (Abschnitt „Schriftarten“):
 ```latex
 \setmainfont{TeX Gyre Termes}  % Times-ähnlich
 % Alternative:
@@ -272,7 +288,7 @@ makeglossaries 1Main
 
 ## 📚 Dokumentation
 
-- Ausführliche Vorlage-Dokumentation: Kompilieren Sie `readme.tex`
+- Typst-Version dieser Vorlage: [typst-thesis-unibw](https://github.com/nkoeberlein/typst-thesis-unibw)
 - LaTeX-Einführung: [Overleaf Documentation](https://www.overleaf.com/learn)
 - BibLaTeX: [BibLaTeX Documentation](https://ctan.org/pkg/biblatex)
 - Minted: [Minted Manual](https://ctan.org/pkg/minted)
@@ -292,18 +308,18 @@ A: Ja! Die Vorlage ist für alle wissenschaftlichen Arbeiten an der UniBw Münch
 A: Diese Vorlage ist speziell für LuaLaTeX optimiert. Mit pdfLaTeX würde sie nicht funktionieren (moderne Pakete, Unicode-Support).
 
 **Q: Wo finde ich eine Schnellstart-Anleitung?**  
-A: Siehe [START_HERE.md](START_HERE.md) für eine ausführliche Schritt-für-Schritt-Anleitung.
+A: Siehe den Abschnitt [Schnellstart](#-schnellstart) oben.
 
 ### Kompilierung
 
 **Q: Wie oft muss ich kompilieren?**  
-A: Für korrekte Referenzen mindestens 3-4 Mal. Das Script `./compile.sh` macht das automatisch.
+A: Für korrekte Referenzen mindestens 3-4 Mal. `latexmk` (bzw. `./compile.sh`) erledigt das automatisch.
 
 **Q: Die Kompilierung dauert sehr lange, gibt es eine schnellere Alternative?**  
 A: Ja! Verwenden Sie `./compile.sh --fast` für schnelle Vorschauen (nur 1× LuaLaTeX).
 
-**Q: Was macht `--watch` Modus?**  
-A: Der Watch-Modus kompiliert automatisch neu, wenn Sie .tex oder .bib Dateien ändern. Praktisch beim Schreiben!
+**Q: Gibt es einen Watch-Modus?**  
+A: Ja: `latexmk -pvc 1Main.tex` kompiliert automatisch neu, wenn Sie .tex oder .bib Dateien ändern.
 
 ### Inhalte
 
@@ -322,7 +338,7 @@ A: Besser nicht! Nutzen Sie sie als Vorlage und ersetzen Sie den Inhalt. Die Str
 ### Anpassungen
 
 **Q: Wie ändere ich die Schriftart?**  
-A: Bearbeiten Sie `default_style/Schriftart-settings.tex`. Dort können Sie andere Fonts mit `\setmainfont{...}` setzen.
+A: Bearbeiten Sie `default_style/setup.tex`. Dort können Sie andere Fonts mit `\setmainfont{...}` setzen.
 
 **Q: Kann ich die UniBw-Farben ändern?**  
 A: Technisch ja, aber für offizielle Arbeiten sollten die Corporate Design Farben beibehalten werden.
@@ -339,7 +355,7 @@ A: Installieren Sie Pygments: `pip3 install Pygments`
 A: Verwenden Sie das Flag `--shell-escape` beim Kompilieren. Die Scripts machen das automatisch.
 
 **Q: "Font not found" Warnung**  
-A: Die Standardfonts (Latin Modern, TeX Gyre) sollten mit TeX Live installiert sein. Prüfen Sie Ihre TeX-Installation.
+A: Bookerly liegt in `fonts/` und wird von dort geladen – kompilieren Sie im Projektordner. Fehlt der Ordner, fällt die Vorlage auf TeX Gyre Heros zurück.
 
 **Q: Kompilierung bricht ab**  
 A: 
