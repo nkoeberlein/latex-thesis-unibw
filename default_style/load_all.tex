@@ -16,3 +16,8 @@
 
 % --- Persönliche Angaben (Autor, Titel, Betreuer etc.) ---
 \input{metadata}
+
+% --- ENTWURF-Wasserzeichen (Schalter \ifisdraft in 1Main.tex) ---
+\ifisdraft
+  \input{default_style/watermark}
+\fi

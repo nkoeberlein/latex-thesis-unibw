@@ -11,23 +11,21 @@
 
 \usepackage{geometry}
 
-\newif\ifdigitalversion
-\digitalversiontrue  % Für PDF/Digital (auf false setzen für Druck)
-
-\ifdigitalversion
+% Schalter \ifisprint wird in 1Main.tex gesetzt
+\ifisprint
   \geometry{
     a4paper, twoside,
-    left=30mm, right=30mm,
-    top=25mm, bottom=30mm,
-    headheight=15pt, headsep=10mm, footskip=12mm
-  }
-\else
-  \geometry{
-    a4paper, twoside,
-    left=35mm, right=25mm,
+    inner=35mm, outer=25mm,
     top=25mm, bottom=30mm,
     headheight=15pt, headsep=10mm, footskip=12mm,
     bindingoffset=5mm
+  }
+\else
+  \geometry{
+    a4paper,
+    left=30mm, right=30mm,
+    top=25mm, bottom=30mm,
+    headheight=15pt, headsep=10mm, footskip=12mm
   }
 \fi
 

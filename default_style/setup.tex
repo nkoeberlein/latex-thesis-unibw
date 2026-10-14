@@ -13,11 +13,20 @@
 % 1. DOKUMENTKLASSE
 % =============================================================
 
+% Schalter-Standardwerte, falls das Hauptdokument sie nicht setzt (z. B. Skript.tex)
+\ifcsname ifisprint\endcsname\else\expandafter\newif\csname ifisprint\endcsname\fi
+\ifcsname ifisdraft\endcsname\else\expandafter\newif\csname ifisdraft\endcsname\fi
+
+% Druck: doppelseitig, Kapitel beginnen rechts – Bildschirm: einseitig
+\ifisprint
+  \PassOptionsToClass{twoside,openright}{scrreprt}
+\else
+  \PassOptionsToClass{oneside,openany}{scrreprt}
+\fi
+
 \documentclass[
   12pt,
   a4paper,
-  twoside,
-  openright,
   bibliography=totoc,
   listof=totoc,
   captions=tableheading,
@@ -36,6 +45,7 @@
   footsepline=false,
   DIV=12,
   BCOR=0mm,
+  cleardoublepage=empty,
   headings=normal,
   footnotes=multiple
 }

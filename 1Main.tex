@@ -17,14 +17,15 @@
 %
 % ===================================================================
 
+% === Schalter (entsprechen is-print / is-draft der Typst-Vorlage) ===
+\newif\ifisprint \isprintfalse  % true = Druck: doppelseitig, Kapitel rechts, Bindekorrektur
+\newif\ifisdraft \isdraftfalse  % true = ENTWURF-Wasserzeichen auf allen Seiten
+
 % === Core-System laden ===
 \input{default_style/load_all}
 
 % Farben für Hervorhebungen definieren
 \definecolor{gray}{rgb}{0.9, 0.9, 0.9}
-
-% === Wasserzeichen für Entwürfe (optional aktivieren) ===
-% \input{default_style/watermark}
 
 % === Zusätzliche Pakete (bei Bedarf) ===
 \usepackage{float}  % Präzise Positionierung von Floats

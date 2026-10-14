@@ -34,11 +34,8 @@
 \definecolor{unibwblue}{RGB}{0, 51, 102}
 \definecolor{unibwgray}{RGB}{102, 102, 102}
 
-% Digital vs. Druck
-\newif\ifprintversion
-\printversionfalse  % true = Druck, false = Digital
-
-\ifprintversion
+% Digital vs. Druck (Schalter \ifisprint in 1Main.tex)
+\ifisprint
   \definecolor{printblack}{cmyk}{0,0,0,0.85}
   \definecolor{printblue}{cmyk}{1,0.5,0,0}
   \colorlet{textcolor}{printblack}
