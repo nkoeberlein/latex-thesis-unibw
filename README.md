@@ -2,7 +2,7 @@
 
 ![LaTeX](https://img.shields.io/badge/LaTeX-LuaLaTeX-008080?logo=latex)
 ![TeX Live](https://img.shields.io/badge/TeX%20Live-2025-blue)
-![License](https://img.shields.io/badge/License-Academic-green)
+[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
 ![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen)
 
@@ -152,7 +152,7 @@ wissenschaftlArbeit/
 │   └── references.bib        # Ihre Literaturquellen
 │
 ├── media/                    # Bilder und Grafiken
-└── fonts/                    # Bookerly (wird direkt aus dem Ordner geladen)
+└── fonts/                    # Optional: eigene Bookerly-Kopie (siehe fonts/README.md)
 ```
 
 ## 📝 Verwendung
@@ -355,7 +355,7 @@ A: Installieren Sie Pygments: `pip3 install Pygments`
 A: Verwenden Sie das Flag `--shell-escape` beim Kompilieren. Die Scripts machen das automatisch.
 
 **Q: "Font not found" Warnung**  
-A: Bookerly liegt in `fonts/` und wird von dort geladen – kompilieren Sie im Projektordner. Fehlt der Ordner, fällt die Vorlage auf TeX Gyre Heros zurück.
+A: Die Vorlage nutzt *Libertinus Serif*, die in TeX Live (`texlive-full` bzw. Paket `libertinus-fonts`) enthalten ist. Fehlt sie, installieren Sie das Paket nach. Eine eigene Bookerly-Kopie in `fonts/` wird automatisch bevorzugt.
 
 **Q: Kompilierung bricht ab**  
 A: 
@@ -381,13 +381,28 @@ A: Löschen Sie erst Ihre Inhalte und Build-Artefakte (`./clean-latex.sh`), dann
 
 ## 📄 Lizenz
 
-Diese Vorlage ist frei verwendbar für akademische Zwecke an der Universität der Bundeswehr München.
+Diese Vorlage steht unter der [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/) Lizenz (siehe [LICENSE](LICENSE)).
+
+**Das bedeutet:** Sie dürfen die Vorlage frei nutzen, anpassen und weitergeben – auch für kommerzielle Zwecke – solange Sie den Urheber nennen:
+
+> Vorlage von Nikolaus Köberlein (@nkoeberlein) – [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+**Ausnahmen** – diese Bestandteile fallen nicht unter CC BY 4.0:
+
+| Bestandteil | Rechte |
+|---|---|
+| `default_style/Signet_UniBw.pdf`, `default_style/Athene*.png` | Logo und Signet der Universität der Bundeswehr München. Alle Rechte bei der UniBw M; nur für Arbeiten an der UniBw verwenden. |
+| Schrift *Libertinus Serif* | Aus TeX Live, [SIL Open Font License 1.1](https://github.com/alerque/libertinus/blob/master/OFL.txt) – nicht Teil dieses Repositorys. |
+| Bookerly (optional, `fonts/`) | Proprietäre Schrift von Amazon – wird **nicht** mitgeliefert und ist per `.gitignore` ausgeschlossen. |
+
+**Empfohlene Nennung in einer Abschlussarbeit** (z. B. in der Danksagung oder einer Fußnote):
+
+> Diese Arbeit wurde mit der LaTeX-Vorlage von Nikolaus Köberlein erstellt
+> (https://github.com/nkoeberlein), lizenziert unter CC BY 4.0.
 
 ## 📞 Kontakt
 
-Bei Fragen zur Vorlage wenden Sie sich an:
-- **Fakultät Informatik**, Universität der Bundeswehr München
-- **Institut für Angewandte Informatik**
+Fragen, Fehler und Verbesserungsvorschläge bitte als [Issue auf GitHub](https://github.com/nkoeberlein/latex-vorlage-unibw-inf/issues).
 
 ---
 
