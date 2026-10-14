@@ -67,7 +67,9 @@
 
 \usepackage{fontspec}
 
-% Hauptschrift: Bookerly aus fonts/ (liegt im Repo, muss nicht installiert sein)
+% Hauptschrift: Libertinus Serif (in TeX Live enthalten, SIL Open Font License) –
+% dieselbe Schrift wie in der Typst-Vorlage. Wer Bookerly selbst besitzt, legt die vier
+% TTF-Dateien nach fonts/ (siehe fonts/README.md); sie werden dann automatisch genutzt.
 \IfFileExists{fonts/Bookerly-Regular.ttf}{
   \setmainfont{Bookerly}[
     Path = fonts/,
@@ -78,14 +80,7 @@
     BoldItalicFont = Bookerly-BoldItalic
   ]
 }{
-  \setmainfont{TeX Gyre Heros}[
-    Scale=1.0,
-    Ligatures=TeX,
-    UprightFont=*-Regular,
-    BoldFont=*-Bold,
-    ItalicFont=*-Italic,
-    BoldItalicFont=*-BoldItalic,
-  ]
+  \setmainfont{Libertinus Serif}
 }
 
 % Monospace-Schrift für Code

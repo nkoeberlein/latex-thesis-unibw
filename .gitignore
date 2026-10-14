@@ -76,6 +76,12 @@ _minted-*
 *.xmpdata
 *.xwm
 
+# === Nicht weitergebbare Dateien (lokal erlaubt, nie committen) ===
+# Bookerly ist proprietär (Amazon) – siehe fonts/README.md
+fonts/Bookerly*
+# Fremdmaterial ohne freie Lizenz
+/docus/*.pdf
+
 # === Build Directory (optional) ===
 build/
 *.backup
