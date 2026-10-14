@@ -26,13 +26,13 @@
         
         \Large
         \textsc{
-            Fakultät Informatik\\
+            \myfaculty\\
             [0.2cm]
-            Institut für Angewandte Informatik\\
+            \myinstitute\\
             [0.2cm]
-            Professur für Softwarewerkzeuge und\\ Methoden für Integrierte Anwendungen\\
+            \myprofessur\\
             [0.2cm]
-            Prof. Dr.-Ing. Andreas Karcher
+            \reviewerone
         }
     \end{center}
     
@@ -41,7 +41,7 @@
     % === Arbeitstitel ===
     \begin{center}
         \Large
-        Bachelor-Thesis \\ % ÄNDERN: Bachelor/Master/Dissertation
+        \mytype \\ % aus metadata.tex
         %[0.4cm]\Large zur Erlangung des akademischen Grades\\Bachelor of Science\\
         %[0.4cm]
         \Large
@@ -63,22 +63,20 @@
     \vfill
     
     % === Betreuungs-Informationen ===
-    \begin{center} 
+    % Leere Felder in metadata.tex (\reviewertwo, \advisor) werden ausgeblendet
+    \ifdefempty{\reviewertwo}{\def\zweitgutachterzeile{}}{\def\zweitgutachterzeile{Zweitgutachter: & \reviewertwo\\}}
+    \ifdefempty{\advisor}{\def\betreuerzeile{}}{\def\betreuerzeile{Betreuer: & \advisor\\}}
+    \begin{center}
         \Large
         \begin{tabular}{ l l }
-            Aufgabensteller         & \reviewerone\\     
-            Zweitgutachter            & \reviewertwo\\                  
-            Betreuer:                     & \advisor\\              
+            Aufgabensteller: & \reviewerone\\
+            \zweitgutachterzeile
+            \betreuerzeile
             \\
-            Tag der Einreichung: & \today, Neubiberg\\              
+            Tag der Einreichung: & \timeend, \myplace\\
         \end{tabular}
     \end{center}
 \end{titlepage}
 
 % === Ursprüngliche Randeinstellungen wiederherstellen ===
 \restoregeometry
-
-% === Leerseite für doppelseitigen Druck ===
-\newpage
-\thispagestyle{empty}
-\section*{ }
