@@ -4,7 +4,7 @@ Präambel der Vorlage. `load_all.tex` wird von `1Main.tex` und `Skript.tex` eing
 
 | Datei | Inhalt |
 |---|---|
-| `setup.tex` | Schalter-Defaults, `\documentclass{scrreprt}`, KOMA-Optionen, Schriften (Bookerly aus `fonts/`), Pakete, biblatex, glossaries, Theorem-Umgebungen |
+| `setup.tex` | Schalter-Defaults, `\documentclass{scrreprt}`, KOMA-Optionen, Schriften (Libertinus Serif; Bookerly nur, wenn lokal in `fonts/` vorhanden), Pakete, biblatex, glossaries, Theorem-Umgebungen |
 | `layout.tex` | geometry (abhängig von `\ifisprint`), Listen, Kopf-/Fußzeilen, **alle** `\addtokomafont`, Glossar-Stil, `\verzeichnislogo` |
 | `style.tex` | Farbpalette, Fußnoten, minted, Emojis, hyperref/bookmark, PDF-Metadaten |
 | `watermark.tex` | ENTWURF-Wasserzeichen, nur bei `\isdrafttrue` |
