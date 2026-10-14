@@ -13,6 +13,8 @@ Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universi
 > **Lieber Typst statt LaTeX?** Es gibt dieselbe Vorlage auch als Typst-Version mit gleichem Aufbau und gleichen Metadaten:
 > [typst-thesis-unibw](https://github.com/nkoeberlein/typst-thesis-unibw)
 
+> **📘 Richtlinien der UniBw:** [Richtlinien zur Anfertigung wissenschaftlicher Arbeiten (Stand Mai 2026)](docus/Richtlinien-wissenschaftliche-Arbeiten-UniBw-Mai-2026.pdf) – herausgegeben vom Dekanat der Fakultät für Betriebswirtschaft. Maßgeblich sind immer die Prüfungsordnung und die Vorgaben der betreuenden Professur; klären Sie Abweichungen (z. B. Seitenränder, Schrift, Zitierstil) vorab.
+
 ## ✨ Features
 
 - **Modernes LaTeX**: Vollständig auf LuaLaTeX optimiert (keine veralteten Pakete)
@@ -391,6 +393,9 @@ Diese Vorlage steht unter der [Creative Commons Attribution 4.0 International (C
 
 | Bestandteil | Rechte |
 |---|---|
+| `docus/Richtlinien-wissenschaftliche-Arbeiten-UniBw-Mai-2026.pdf` | Richtlinien des Dekanats der Fakultät für Betriebswirtschaft der UniBw München. Alle Rechte bei der UniBw M; nur zur Information beigelegt. |
+| `docus/LaTeX für Einsteiger_November2022.pdf` | Kursunterlagen „LaTeX für Einsteiger“ von Raphael Wiegand (Münchner Volkshochschule). Alle Rechte beim Autor; nur zur Information beigelegt. |
+| `docus/LaTeX-Refsheet.pdf` | LaTeX-Referenzblatt eines Dritten. Rechte beim jeweiligen Urheber; nur zur Information beigelegt. |
 | `default_style/Signet_UniBw.pdf`, `default_style/Athene*.png` | Logo und Signet der Universität der Bundeswehr München. Alle Rechte bei der UniBw M; nur für Arbeiten an der UniBw verwenden. |
 | Schrift *Libertinus Serif* | Aus TeX Live, [SIL Open Font License 1.1](https://github.com/alerque/libertinus/blob/master/OFL.txt) – nicht Teil dieses Repositorys. |
 | Bookerly (optional, `fonts/`) | Proprietäre Schrift von Amazon – wird **nicht** mitgeliefert und ist per `.gitignore` ausgeschlossen. |

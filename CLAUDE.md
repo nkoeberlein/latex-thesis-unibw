@@ -19,7 +19,7 @@ Layout, Metadaten-Felder und Schalter sind bewusst parallel gehalten.
 | `content/` | Kapitel und Frontmatter-Inhalte (Abstract, Aufgabenstellung, Glossar-Einträge) |
 | `bibliography/` | `references.bib` (biblatex/Biber, `numeric`) |
 | `fonts/` | leer im Repo; optionale eigene Bookerly-Kopie (git-ignoriert), sonst Libertinus Serif aus TeX Live |
-| `docus/` | Installationsanleitung (`LaTeX-Installation.md`); lokale PDFs sind git-ignoriert |
+| `docus/` | Installationsanleitung, UniBw-Richtlinien (Mai 2026), Fremd-PDFs – alle PDFs sind Lizenz-Ausnahmen |
 | `.claude/skills/` | `latex-compile`, `latex-review`, `bibliography` |
 
 ## Build
@@ -40,5 +40,5 @@ latexmk 1Main.tex    # .latexmkrc: lualatex --shell-escape + biber + makeglossar
 - Schriften für Überschriften/Captions nur in `layout.tex` setzen (`\addtokomafont` hängt an, mehrfaches Setzen überschreibt sich).
 - Optionale Metadaten (`\reviewertwo`, `\advisor`) leer → werden per `\ifdefempty` ausgeblendet.
 - Hardcodierte Namen/Daten in `default_frame/` vermeiden – immer Makros aus `metadata.tex` verwenden.
-- Lizenz CC BY 4.0 (Repo öffentlich): keine proprietären Schriften (Bookerly) oder Fremd-PDFs committen;
+- Lizenz CC BY 4.0 (Repo öffentlich): keine proprietären Schriften (Bookerly) committen; neue Fremd-PDFs nur mit Eintrag als Ausnahme in `LICENSE` und README;
   UniBw-Logos sind als Ausnahme in `LICENSE` und README genannt.
