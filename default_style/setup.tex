@@ -3,12 +3,6 @@
 % Ersetzt: documentclass.tex + load_packages.tex + Schriftart-settings.tex
 % =============================================================
 
-% --- Warnungen unterdrücken ---
-\RequirePackage{silence}
-\WarningFilter*{titlesec}{Non standard sectioning command detected}
-\WarningFilter*{titlesec}{Usage of package `titlesec'}
-\WarningFilter*{titlesec}{Activating an ugly workaround}
-
 % =============================================================
 % 1. DOKUMENTKLASSE
 % =============================================================
@@ -50,13 +44,7 @@
   footnotes=multiple
 }
 
-% Überschriften-Stile
-\addtokomafont{disposition}{\rmfamily\bfseries}
-\addtokomafont{chapter}{\large}
-\addtokomafont{section}{\normalsize}
-\addtokomafont{subsection}{\small}
-\addtokomafont{caption}{\small\itshape}
-\addtokomafont{captionlabel}{\bfseries}
+% Überschriften-, Kopfzeilen- und Beschriftungsschriften: siehe layout.tex
 
 % Nummerierungstiefe
 \setcounter{secnumdepth}{3}
@@ -69,9 +57,7 @@
 
 % LuaTeX-Prüfung
 \usepackage{iftex}
-\ifLuaTeX
-  \RequirePackage{luatex85}
-\else
+\ifLuaTeX\else
   \PackageError{setup}{Diese Vorlage erfordert LuaLaTeX!}{}
 \fi
 
@@ -137,7 +123,8 @@
 \usepackage{comment}
 
 % Mathematik
-\usepackage{amsmath, amssymb, amsfonts, amsthm, amsbsy}
+% amssymb/amsfonts/amsbsy entfallen: unicode-math liefert \mathbb, \symbf usw.
+\usepackage{amsmath, amsthm}
 \usepackage{mathtools}
 \usepackage{unicode-math}
 
@@ -146,8 +133,7 @@
 \usepackage{multirow}
 \usepackage{array, longtable}
 \usepackage{tabularray}
-\usepackage{lscape}
-\usepackage{pdflscape}
+\usepackage{pdflscape}  % lädt lscape und dreht die Seite auch im PDF-Viewer
 
 % Grafiken
 \usepackage{graphicx}
@@ -190,8 +176,7 @@
 \usepackage{todonotes}
 
 % URLs & Links
-\usepackage{url}
-\usepackage{xurl}
+\usepackage{xurl}  % lädt url, erlaubt Umbrüche an jeder Stelle
 
 % Beschriftungen
 \usepackage[
@@ -236,8 +221,5 @@
 }
 
 % LuaTeX-spezifische Pakete
-\usepackage{luatex85}
-\ifLuaTeX
-  \usepackage{luacode}
-  \usepackage{shellesc}
-\fi
+\usepackage{luacode}
+\usepackage{shellesc}

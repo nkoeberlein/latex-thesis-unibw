@@ -78,8 +78,8 @@
 % 4. INHALTSVERZEICHNIS (TOC)
 % =============================================================
 
-% Schriftarten für TOC-Elemente
-\addtokomafont{disposition}{\bfseries}
+% Schriften für Überschriften, Kopfzeilen und Beschriftungen (einzige Stelle)
+\addtokomafont{disposition}{\rmfamily\bfseries}
 \addtokomafont{chapter}{\LARGE\bfseries\color{headingcolor}}
 \addtokomafont{section}{\Large\bfseries\color{headingcolor}}
 \addtokomafont{subsection}{\large\bfseries\color{headingcolor}}
@@ -94,7 +94,7 @@
 % Kopf/Fuß, Beschriftungen
 \addtokomafont{pageheadfoot}{\small\color{secondary}}
 \addtokomafont{pagenumber}{\small\bfseries}
-\addtokomafont{caption}{\small\color{secondary}}
+\addtokomafont{caption}{\small\itshape\color{secondary}}
 \addtokomafont{captionlabel}{\small\bfseries\color{headingcolor}}
 \addtokomafont{footnote}{\footnotesize}
 \addtokomafont{chapterentry}{\bfseries\color{headingcolor}}
@@ -102,14 +102,7 @@
 % TOC-Konfiguration
 \KOMAoptions{toc=chapterentrywithdots}
 
-% Deutsche Bezeichnungen
-\renewcommand{\contentsname}{Inhaltsverzeichnis}
-\renewcommand{\listfigurename}{Abbildungsverzeichnis}
-\renewcommand{\listtablename}{Tabellenverzeichnis}
-\renewcommand{\figurename}{Abbildung}
-\renewcommand{\tablename}{Tabelle}
-\renewcommand{\chaptername}{Kapitel}
-\renewcommand{\appendixname}{Anhang}
+% Deutsche Bezeichnungen (Inhaltsverzeichnis, Abbildung, Anhang, …) setzt polyglossia
 
 % =============================================================
 % 5. ABKÜRZUNGSVERZEICHNIS (GLOSSARIES)
@@ -137,5 +130,4 @@
 % Zusätzliche Glossar-Arten
 \newglossary[slg]{symbols}{syi}{syg}{Symbolverzeichnis}
 
-% Glossar aktivieren
-\makeglossaries
+% \makeglossaries steht in 1Main.tex (nach allen \newglossary-Definitionen)

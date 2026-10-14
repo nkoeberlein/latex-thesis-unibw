@@ -24,11 +24,8 @@
 % === Core-System laden ===
 \input{default_style/load_all}
 
-% Farben für Hervorhebungen definieren
-\definecolor{gray}{rgb}{0.9, 0.9, 0.9}
-
 % === Zusätzliche Pakete (bei Bedarf) ===
-\usepackage{float}  % Präzise Positionierung von Floats
+% \usepackage{...}
 
 % === Bibliographie-Ressource ===
 \addbibresource{bibliography/references.bib}
@@ -60,9 +57,9 @@
 
 % === Verzeichnisse ===
 \input{default_frame/Inhaltsverzeichnis}             % Inhaltsverzeichnis (erforderlich)
-\include{default_frame/Abbildungsverzeichnis}        % Bei Bedarf aktivieren
-\include{default_frame/Tabellenverzeichnis}          % Bei Bedarf aktivieren
-\include{default_frame/Abkuerzungsverzeichnis}       % Bei Bedarf aktivieren
+\input{default_frame/Abbildungsverzeichnis}          % Bei Bedarf auskommentieren
+\input{default_frame/Tabellenverzeichnis}            % Bei Bedarf auskommentieren
+\input{default_frame/Abkuerzungsverzeichnis}         % Bei Bedarf auskommentieren
 
 % === Hauptteil: Seitennummerierung arabisch ===
 \pagenumbering{arabic}
@@ -99,7 +96,6 @@
 
 % === Anhang ===
 \appendix
-\renewcommand{\chaptername}{Anhang}
 
 \input{default_frame/Glossar}
 \input{content/Code.tex}                              % Code-Beispiele
