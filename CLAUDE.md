@@ -19,7 +19,7 @@ Layout, Metadaten-Felder und Schalter sind bewusst parallel gehalten.
 | `content/` | Kapitel und Frontmatter-Inhalte (Abstract, Aufgabenstellung, Glossar-Einträge) |
 | `bibliography/` | `references.bib` (biblatex/Biber, `numeric`) |
 | `fonts/` | leer im Repo; optionale eigene Bookerly-Kopie (git-ignoriert), sonst Libertinus Serif aus TeX Live |
-| `docus/` | Installationsanleitung, UniBw-Richtlinien (Mai 2026), Fremd-PDFs – alle PDFs sind Lizenz-Ausnahmen |
+| `docus/` | Installationsanleitung, Fremd-PDFs (VHS-Folien, Refsheet) – die PDFs sind Lizenz-Ausnahmen |
 | `.claude/skills/` | `latex-compile`, `latex-review`, `bibliography` |
 
 ## Build
