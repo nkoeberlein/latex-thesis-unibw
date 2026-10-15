@@ -15,6 +15,10 @@ Moderne LaTeX-Vorlage für Seminar-, Bachelor-, Master- und Doktorarbeiten an de
 
 > **📘 Formale Vorgaben:** Maßgeblich sind die Prüfungsordnung, die Richtlinien der Fakultät und die Vorgaben der betreuenden Professur.
 
+![Vorschau: Titelseite, Inhaltsverzeichnis, Kapitel mit Tabelle und Code-Anhang](docs/preview.png)
+
+<sub>Titelseite · Inhaltsverzeichnis · Kapitel mit Tabelle · Code-Anhang – erzeugt aus dieser Vorlage ohne Änderungen.</sub>
+
 ## ✨ Features
 
 - **Modernes LaTeX**: Vollständig auf LuaLaTeX optimiert (keine veralteten Pakete)
