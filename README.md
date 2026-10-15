@@ -6,7 +6,7 @@
 ![Status](https://img.shields.io/badge/Status-Production%20Ready-success)
 ![Maintained](https://img.shields.io/badge/Maintained-Yes-brightgreen)
 
-Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universität der Bundeswehr München, optimiert für **LuaLaTeX** (Stand: 2026).
+Moderne LaTeX-Vorlage für Seminar-, Bachelor-, Master- und Doktorarbeiten an der Universität der Bundeswehr München – für alle Fakultäten, optimiert für **LuaLaTeX** (Stand: 2026).
 
 > **🚀 Neu hier?** → Direkt zum [Schnellstart](#-schnellstart).
 >
@@ -406,7 +406,7 @@ Diese Vorlage steht unter der [Creative Commons Attribution 4.0 International (C
 
 ## 📞 Kontakt
 
-Fragen, Fehler und Verbesserungsvorschläge bitte als [Issue auf GitHub](https://github.com/nkoeberlein/latex-vorlage-unibw-inf/issues).
+Fragen, Fehler und Verbesserungsvorschläge bitte als [Issue auf GitHub](https://github.com/nkoeberlein/latex-thesis-unibw/issues).
 
 ---
 

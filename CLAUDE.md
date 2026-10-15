@@ -1,4 +1,4 @@
-# latex-vorlage-unibw-inf
+# latex-thesis-unibw
 
 LuaLaTeX-Vorlage (KOMA `scrreprt`) für Bachelor-/Master-/Seminararbeiten an der UniBw München.
 Schwesterprojekt: Typst-Version unter `../wissenschaftlArbeit_UniBw_typst` (GitHub `typst-thesis-unibw`) –
