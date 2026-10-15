@@ -1,0 +1,43 @@
+% =============================================================
+% Eigenstaendigkeitserklaerung.tex – Eigenständigkeitserklärung
+% Wortlaut nach dem Muster der UniBw-Richtlinien (Stand Mai 2026),
+% identisch mit der Typst-Vorlage. Den geforderten Wortlaut ggf.
+% beim Prüfungsamt bzw. der betreuenden Professur prüfen.
+% =============================================================
+
+% Zwei Felder mit Linie und Beschriftung: Ort, Datum (vorausgefüllt) | Unterschrift
+\providecommand{\unterschriftsfeld}[2]{%
+  \begin{minipage}[b]{0.45\textwidth}
+    #1\\[-0.4em]
+    \textcolor{gray}{\rule{\linewidth}{0.4pt}}\\
+    {\small\itshape\textcolor{gray}{#2}}
+  \end{minipage}%
+}
+\providecommand{\unterschriftsblock}{%
+  \par\vspace{1.2cm}\noindent
+  \unterschriftsfeld{\myplace, \timeend}{Ort, Datum}\hfill
+  \unterschriftsfeld{\mbox{}}{Unterschrift}\par
+}
+
+\addchap{Eigenständigkeitserklärung}\label{eigenstaendigkeitserklaerung}
+
+\noindent
+\begin{tabular}{@{}l p{0.7\textwidth}@{}}
+  Vor- und Nachname: & \myname \\
+  Titel der Arbeit:  & \textit{\mytitle} \\
+\end{tabular}
+
+Hiermit versichere ich, dass ich die vorliegende Arbeit selbstständig verfasst, noch nicht anderweitig für Prüfungszwecke vorgelegt und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt habe, insbesondere keine anderen als die angegebenen Informationen.
+
+Alle übernommenen sowie mit Unterstützung von KI generierten Inhalte wurden entsprechend den anerkannten wissenschaftlichen Grundsätzen oder entsprechend der Regelungen zur Kennzeichnung von KI-Inhalten kenntlich gemacht. Ausgenommen von der Kenntlichmachung sind orthografische oder grammatikalische Korrekturen, Übersetzungen sowie nicht-sinnverändernde Verbesserungen von Formulierungen.
+
+Ich bin mir bewusst, dass mit KI generierte Texte keine Garantie für die Qualität von Inhalten und Text bieten. Daher erkläre ich, dass ich KI-Werkzeuge lediglich als Hilfsmittel genutzt habe, die von KI generierten Inhalte kritisch überprüft habe und mein eigenständiger kognitiver sowie kreativer Einfluss in dieser Arbeit überwiegt. Ich versichere, dass ich die Inhalte meiner Arbeit vollständig verstanden habe und selbstständig vertreten kann.
+
+Ich versichere, dass ich ausschließlich KI-Werkzeuge verwendet habe, deren Nutzung vom Prüfer oder der Prüferin als Hilfsmittel zugelassen wurden.
+
+\unterschriftsblock
+
+\vspace{1cm}
+Der Speicherung meiner Arbeit zum Zweck der Plagiatsprüfung stimme ich zu. Ich versichere, dass die elektronische Version mit der gedruckten Version inhaltlich übereinstimmt.
+
+\unterschriftsblock

@@ -58,7 +58,7 @@ Moderne LaTeX-Vorlage für Bachelor-, Master- und Doktorarbeiten an der Universi
 ### 1. Vorlage anpassen
 
 1. **Persönliche Angaben**: Öffnen Sie `metadata.tex` – das ist die einzige Datei, die Sie zu Beginn anpassen müssen.
-   Titelseite, Eidesstattliche Erklärung, Exposé und PDF-Metadaten lesen ihre Angaben von dort.
+   Titelseite, Eigenständigkeitserklärung, Exposé und PDF-Metadaten lesen ihre Angaben von dort.
    - Name, Matrikelnummer, Titel, Art der Arbeit
    - Fakultät, Institut, Professur
    - Gutachter/Betreuer – `\reviewertwo` und `\advisor` leer lassen (`{}`), um sie auf der Titelseite auszublenden
@@ -140,7 +140,7 @@ wissenschaftlArbeit/
 │   ├── Inhaltsverzeichnis.tex
 │   ├── Literaturverzeichnis.tex
 │   ├── Glossar.tex
-│   └── SelbststaendigkeitserklaerungUniBwM.tex
+│   └── Eigenstaendigkeitserklaerung.tex
 │
 ├── default_style/             # Styling und Pakete
 │   ├── load_all.tex          # Lädt alle Konfigurationen + metadata.tex

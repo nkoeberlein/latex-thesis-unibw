@@ -10,7 +10,7 @@ Formale Seiten der Arbeit, eingebunden aus `1Main.tex` per `\input`.
 | `Abkuerzungsverzeichnis.tex` | `\printglossary[type=acronym]` |
 | `Glossar.tex` | `\printglossary[type=main]` im Anhang |
 | `Literaturverzeichnis.tex` | `\printbibliography` (ohne Kategorie `abbildung`) |
-| `SelbststaendigkeitserklaerungUniBwM.tex` | Eidesstattliche Erklärung mit `\mytitle`, `\myplace`, `\timeend` |
+| `Eigenstaendigkeitserklaerung.tex` | Eigenständigkeitserklärung (Muster UniBw Mai 2026, wortgleich mit Typst `pages/declaration.typ`) mit `\myname`, `\mytitle`, `\myplace`, `\timeend` |
 
 ## Muster
 
